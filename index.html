@@ -3,67 +3,96 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SAG Teachers Daily Attendance Management System</title>
+
+<title>Senior Chief Adano Day Secondary School - Attendance System</title>
 
 <style>
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
-    font-family:Arial,Helvetica,sans-serif;
+}
+
+:root{
+    --navy:#09233f;
+    --navy2:#12395d;
+    --sky:#38a9e8;
+    --light:#eef7fc;
+    --white:#ffffff;
+    --gold:#d8ad45;
+    --green:#198754;
+    --red:#dc3545;
+    --orange:#f59e0b;
+    --gray:#64748b;
+    --border:#d9e2ec;
+    --shadow:0 8px 25px rgba(9,35,63,.10);
 }
 
 body{
-    background:#f3f7fb;
-    color:#14213d;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f8fb;
+    color:#172b3a;
 }
 
-/* LOGIN */
+button,
+input,
+select,
+textarea{
+    font:inherit;
+}
 
-.login-screen{
+button{
+    cursor:pointer;
+}
+
+/* ================= LOGIN ================= */
+
+#loginScreen{
     min-height:100vh;
     display:flex;
-    justify-content:center;
     align-items:center;
-    background:linear-gradient(135deg,#062b4f,#0b5c91,#65c6ed);
+    justify-content:center;
+    background:
+        linear-gradient(135deg,#09233f,#12395d,#38a9e8);
     padding:20px;
 }
 
-.login-box{
+.login-card{
     width:100%;
-    max-width:450px;
+    max-width:470px;
     background:white;
     border-radius:20px;
     padding:35px;
     box-shadow:0 20px 60px rgba(0,0,0,.25);
 }
 
-.logo{
-    width:90px;
-    height:90px;
+.school-logo{
+    width:95px;
+    height:95px;
     border-radius:50%;
-    margin:0 auto 15px;
-    background:#0a5c8f;
-    color:white;
+    background:#eef7fc;
+    border:5px solid var(--sky);
+    margin:0 auto 20px;
     display:flex;
-    justify-content:center;
     align-items:center;
-    font-size:30px;
+    justify-content:center;
+    color:var(--navy);
     font-weight:bold;
-    border:5px solid #d8b32c;
+    text-align:center;
+    font-size:13px;
 }
 
-.login-box h1{
+.login-card h1{
     text-align:center;
-    color:#062b4f;
-    font-size:22px;
-    line-height:1.4;
+    color:var(--navy);
+    font-size:23px;
+    line-height:1.3;
 }
 
-.login-box .subtitle{
+.login-card .subtitle{
     text-align:center;
-    color:#777;
-    margin:8px 0 25px;
+    margin:10px 0 25px;
+    color:var(--gray);
 }
 
 .form-group{
@@ -74,89 +103,52 @@ body{
     display:block;
     margin-bottom:7px;
     font-weight:bold;
-    color:#333;
+    color:var(--navy);
 }
 
-input,select{
+.form-group input,
+.form-group select,
+.form-group textarea{
     width:100%;
     padding:13px;
-    border:1px solid #ccd6df;
+    border:1px solid var(--border);
     border-radius:9px;
-    font-size:15px;
     outline:none;
 }
 
-input:focus,select:focus{
-    border-color:#178acb;
-    box-shadow:0 0 0 3px rgba(23,138,203,.1);
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+    border-color:var(--sky);
+    box-shadow:0 0 0 3px rgba(56,169,232,.12);
 }
 
-.btn{
-    border:none;
-    padding:12px 18px;
-    border-radius:9px;
-    cursor:pointer;
-    font-weight:bold;
-    font-size:14px;
-    transition:.2s;
-}
-
-.btn:hover{
-    transform:translateY(-1px);
-}
-
-.btn-primary{
-    background:#07558a;
-    color:white;
-}
-
-.btn-primary:hover{
-    background:#063f66;
-}
-
-.btn-success{
-    background:#168a55;
-    color:white;
-}
-
-.btn-danger{
-    background:#c73737;
-    color:white;
-}
-
-.btn-warning{
-    background:#d4a619;
-    color:white;
-}
-
-.btn-secondary{
-    background:#64748b;
-    color:white;
-}
-
-.full{
+.login-btn{
     width:100%;
+    padding:14px;
+    border:none;
+    border-radius:9px;
+    background:var(--navy);
+    color:white;
+    font-weight:bold;
+}
+
+.login-btn:hover{
+    background:var(--navy2);
 }
 
 .demo-box{
-    background:#eef7fc;
-    border-left:4px solid #178acb;
-    padding:12px;
-    margin-top:18px;
-    border-radius:7px;
+    margin-top:20px;
+    background:#f3f8fc;
+    padding:15px;
+    border-radius:10px;
     font-size:13px;
-    color:#34495e;
+    line-height:1.7;
 }
 
-.error{
-    color:#c62828;
-    margin-top:10px;
-    font-size:14px;
-}
+/* ================= APP ================= */
 
-/* APP */
-
-.app{
+#app{
     display:none;
     min-height:100vh;
 }
@@ -165,89 +157,100 @@ input:focus,select:focus{
     position:fixed;
     left:0;
     top:0;
-    width:260px;
-    height:100vh;
-    background:#062b4f;
+    bottom:0;
+    width:250px;
+    background:var(--navy);
     color:white;
-    padding:20px 15px;
     overflow-y:auto;
+    z-index:20;
 }
 
-.school-title{
-    text-align:center;
-    padding:10px 5px 20px;
-    border-bottom:1px solid rgba(255,255,255,.15);
+.brand{
+    padding:25px 20px;
+    border-bottom:1px solid rgba(255,255,255,.12);
 }
 
-.school-logo{
-    width:70px;
-    height:70px;
-    border-radius:50%;
-    margin:auto;
-    background:#0c6399;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-weight:bold;
-    font-size:22px;
-    border:3px solid #d8b32c;
-}
-
-.school-title h2{
-    font-size:14px;
-    margin-top:12px;
+.brand h2{
+    font-size:18px;
     line-height:1.4;
 }
 
-.user-role{
-    font-size:11px;
-    color:#8dd7fa;
+.brand p{
+    font-size:12px;
+    color:#b9d8eb;
     margin-top:5px;
 }
 
 .nav{
-    margin-top:20px;
+    padding:15px 10px;
 }
 
 .nav button{
     width:100%;
     text-align:left;
-    background:transparent;
-    color:white;
-    border:none;
-    padding:13px;
+    padding:12px 14px;
     margin-bottom:5px;
+    border:none;
+    background:transparent;
+    color:#dbeaf5;
     border-radius:8px;
-    cursor:pointer;
-    font-size:14px;
 }
 
 .nav button:hover,
 .nav button.active{
-    background:#0b5c91;
+    background:#17466f;
+    color:white;
 }
 
 .main{
-    margin-left:260px;
+    margin-left:250px;
     min-height:100vh;
 }
 
 .topbar{
-    height:70px;
     background:white;
-    border-bottom:1px solid #dce4ea;
+    border-bottom:1px solid var(--border);
+    padding:17px 25px;
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    padding:0 30px;
+    align-items:center;
+    gap:15px;
+    position:sticky;
+    top:0;
+    z-index:10;
 }
 
-.topbar h2{
-    color:#062b4f;
+.topbar-title{
+    font-size:20px;
+    font-weight:bold;
+    color:var(--navy);
+}
+
+.user-info{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.role-badge{
+    background:#eaf5fb;
+    color:var(--navy);
+    padding:7px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.logout-btn{
+    border:none;
+    background:var(--red);
+    color:white;
+    padding:9px 13px;
+    border-radius:7px;
 }
 
 .content{
-    padding:30px;
+    padding:25px;
 }
 
 .page{
@@ -258,20 +261,7 @@ input:focus,select:focus{
     display:block;
 }
 
-.page-title{
-    margin-bottom:25px;
-}
-
-.page-title h1{
-    color:#062b4f;
-    margin-bottom:5px;
-}
-
-.page-title p{
-    color:#718096;
-}
-
-/* CARDS */
+/* ================= CARDS ================= */
 
 .cards{
     display:grid;
@@ -282,43 +272,90 @@ input:focus,select:focus{
 
 .card{
     background:white;
-    border-radius:14px;
-    padding:22px;
-    box-shadow:0 4px 16px rgba(0,0,0,.06);
-    border:1px solid #e5edf3;
+    border-radius:13px;
+    padding:20px;
+    box-shadow:var(--shadow);
+    border:1px solid var(--border);
 }
 
-.stat-label{
-    color:#718096;
+.card-label{
+    color:var(--gray);
     font-size:13px;
-    margin-bottom:8px;
+    margin-bottom:9px;
 }
 
-.stat-value{
+.card-value{
     font-size:28px;
     font-weight:bold;
-    color:#062b4f;
+    color:var(--navy);
 }
 
-.card-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:18px;
+.card small{
+    color:var(--gray);
 }
 
-.card-header h3{
-    color:#062b4f;
-}
-
-/* TABLE */
-
-.table-card{
+.section{
     background:white;
-    border-radius:14px;
-    padding:20px;
+    border:1px solid var(--border);
+    border-radius:13px;
+    padding:22px;
+    margin-bottom:22px;
+    box-shadow:var(--shadow);
+}
+
+.section h2{
+    color:var(--navy);
+    margin-bottom:17px;
+    font-size:19px;
+}
+
+/* ================= BUTTONS ================= */
+
+.btn{
+    border:none;
+    padding:11px 16px;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+.btn-primary{
+    background:var(--navy);
+    color:white;
+}
+
+.btn-primary:hover{
+    background:var(--navy2);
+}
+
+.btn-success{
+    background:var(--green);
+    color:white;
+}
+
+.btn-danger{
+    background:var(--red);
+    color:white;
+}
+
+.btn-warning{
+    background:var(--orange);
+    color:white;
+}
+
+.btn-light{
+    background:#edf3f7;
+    color:var(--navy);
+}
+
+.btn:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+}
+
+/* ================= TABLE ================= */
+
+.table-wrap{
     overflow-x:auto;
-    box-shadow:0 4px 16px rgba(0,0,0,.06);
 }
 
 table{
@@ -327,228 +364,234 @@ table{
     min-width:800px;
 }
 
-th,td{
-    padding:12px 10px;
+th,
+td{
+    border-bottom:1px solid var(--border);
+    padding:12px;
     text-align:left;
-    border-bottom:1px solid #e7edf2;
     font-size:13px;
 }
 
 th{
-    background:#f5f9fc;
-    color:#36536b;
+    background:#f1f7fb;
+    color:var(--navy);
 }
 
-.badge{
+tr:hover td{
+    background:#fafcfe;
+}
+
+/* ================= STATUS ================= */
+
+.status{
     display:inline-block;
     padding:5px 9px;
-    border-radius:20px;
+    border-radius:15px;
     font-size:11px;
     font-weight:bold;
 }
 
-.badge-green{
-    background:#dcf5e7;
-    color:#126b3d;
+.status-green{
+    background:#e5f7ed;
+    color:#13733f;
 }
 
-.badge-red{
-    background:#fde2e2;
-    color:#a51e1e;
+.status-red{
+    background:#fde8ea;
+    color:#a91e2c;
 }
 
-.badge-yellow{
-    background:#fff3cd;
-    color:#856404;
+.status-orange{
+    background:#fff3d9;
+    color:#9a6500;
 }
 
-.badge-blue{
-    background:#dff2fc;
-    color:#07558a;
+.status-blue{
+    background:#e5f3fb;
+    color:#0d5d8c;
 }
 
-/* GRID */
-
-.grid-2{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:20px;
+.status-gray{
+    background:#edf0f2;
+    color:#56616a;
 }
 
-.grid-3{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-}
+/* ================= ATTENDANCE ================= */
 
-.info-list{
-    list-style:none;
-}
-
-.info-list li{
-    padding:10px 0;
-    border-bottom:1px solid #edf1f4;
-}
-
-.info-list strong{
-    color:#062b4f;
-}
-
-/* CLOCK */
-
-.clock-card{
+.clock-panel{
     text-align:center;
-    padding:35px;
+    padding:30px;
 }
 
-.current-time{
+.clock{
     font-size:42px;
     font-weight:bold;
-    color:#07558a;
+    color:var(--navy);
     margin:15px 0;
 }
 
-.current-date{
-    color:#718096;
-    margin-bottom:25px;
+.clock-actions{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
 }
 
-.location-box{
-    background:#f4f9fc;
+.big-btn{
+    min-width:180px;
+    padding:15px 20px;
+    font-size:16px;
+}
+
+/* ================= GPS ================= */
+
+.gps-box{
+    background:#f5faff;
+    border:1px solid #cfe5f2;
     border-radius:10px;
-    padding:15px;
-    margin:20px 0;
-    text-align:left;
+    padding:18px;
+    margin-top:15px;
 }
 
-.location-box strong{
-    color:#062b4f;
+.gps-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:12px;
 }
 
-/* ALERT */
+.gps-item{
+    background:white;
+    padding:13px;
+    border-radius:8px;
+    border:1px solid var(--border);
+}
 
-.alert{
-    padding:14px 17px;
-    border-radius:9px;
+.gps-item strong{
+    display:block;
+    color:var(--navy);
+    margin-bottom:5px;
+}
+
+.warning{
+    border-left:5px solid var(--orange);
+    background:#fff8e8;
+    padding:14px;
+    border-radius:7px;
+}
+
+.success-box{
+    border-left:5px solid var(--green);
+    background:#eaf8f0;
+    padding:14px;
+    border-radius:7px;
+}
+
+.danger-box{
+    border-left:5px solid var(--red);
+    background:#fff0f1;
+    padding:14px;
+    border-radius:7px;
+}
+
+/* ================= FORMS ================= */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+}
+
+.form-actions{
+    margin-top:15px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+/* ================= AI ================= */
+
+.ai-box{
+    background:linear-gradient(135deg,#09233f,#17466f);
+    color:white;
+    padding:25px;
+    border-radius:13px;
     margin-bottom:20px;
 }
 
-.alert-info{
-    background:#e1f3fc;
-    color:#07558a;
-}
-
-.alert-warning{
-    background:#fff3cd;
-    color:#765900;
-}
-
-.alert-danger{
-    background:#fde2e2;
-    color:#a51e1e;
-}
-
-.alert-success{
-    background:#ddf6e8;
-    color:#126b3d;
-}
-
-/* PROFILE */
-
-.profile{
-    display:flex;
-    align-items:center;
-    gap:20px;
-    margin-bottom:25px;
-}
-
-.profile-photo{
-    width:90px;
-    height:90px;
-    border-radius:50%;
-    background:#0b5c91;
+.ai-box h2{
     color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:28px;
-    font-weight:bold;
 }
 
-/* MOBILE */
+.ai-verdict{
+    font-size:20px;
+    font-weight:bold;
+    margin:15px 0;
+}
+
+.ai-list{
+    line-height:1.9;
+    padding-left:20px;
+}
+
+/* ================= MOBILE ================= */
+
+.mobile-menu{
+    display:none;
+    border:none;
+    background:var(--navy);
+    color:white;
+    padding:9px 12px;
+    border-radius:7px;
+}
 
 @media(max-width:900px){
 
     .sidebar{
-        width:210px;
+        transform:translateX(-100%);
+        transition:.25s;
     }
 
-    .main{
-        margin-left:210px;
-    }
-
-    .grid-2,
-    .grid-3{
-        grid-template-columns:1fr;
-    }
-}
-
-@media(max-width:650px){
-
-    .sidebar{
-        position:relative;
-        width:100%;
-        height:auto;
+    .sidebar.open{
+        transform:translateX(0);
     }
 
     .main{
         margin-left:0;
     }
 
+    .mobile-menu{
+        display:block;
+    }
+
     .topbar{
-        padding:0 15px;
+        padding:12px 15px;
     }
 
     .content{
         padding:15px;
     }
 
-    .cards{
-        grid-template-columns:1fr 1fr;
+    .topbar-title{
+        font-size:16px;
     }
 
-    .current-time{
-        font-size:30px;
-    }
-}
-
-@media(max-width:430px){
-
-    .cards{
-        grid-template-columns:1fr;
+    .user-info .role-badge{
+        display:none;
     }
 }
 
-/* PRINT */
+@media(max-width:600px){
 
-@media print{
-
-    .sidebar,
-    .topbar,
-    .no-print{
-        display:none!important;
+    .login-card{
+        padding:25px 18px;
     }
 
-    .main{
-        margin:0;
+    .clock{
+        font-size:32px;
     }
 
-    .content{
-        padding:0;
-    }
-
-    .page{
-        display:block!important;
+    .section{
+        padding:16px;
     }
 }
 </style>
@@ -556,15 +599,24 @@ th{
 
 <body>
 
-<!-- ================= LOGIN ================= -->
+<!-- =========================================================
+     LOGIN
+========================================================= -->
 
-<div id="loginScreen" class="login-screen">
+<div id="loginScreen">
 
-    <div class="login-box">
+    <div class="login-card">
 
-        <div class="logo">SAG</div>
+        <div class="school-logo">
+            SCAD<br>
+            DAY<br>
+            SCHOOL
+        </div>
 
-        <h1>SENIOR CHIEF ADANO DAY SECONDARY SCHOOL</h1>
+        <h1>
+            SENIOR CHIEF ADANO DAY<br>
+            SECONDARY SCHOOL
+        </h1>
 
         <p class="subtitle">
             Teachers Daily Attendance Management System
@@ -580,102 +632,39 @@ th{
             <input id="loginPassword" type="password" placeholder="Enter password">
         </div>
 
-        <button class="btn btn-primary full" onclick="login()">
-            SIGN IN
+        <button class="login-btn" onclick="login()">
+            LOGIN
         </button>
 
-        <div id="loginError" class="error"></div>
+        <div id="loginMessage"></div>
 
         <div class="demo-box">
-            <strong>Demo Accounts</strong><br><br>
-
-            Teacher:<br>
-            Username: teacher<br>
-            Password: teacher123<br><br>
-
-            Admin:<br>
-            Username: admin<br>
-            Password: admin123<br><br>
-
-            Principal:<br>
-            Username: principal<br>
-            Password: principal123
+            <strong>Testing accounts</strong><br>
+            Teacher: <b>teacher</b> / <b>teacher123</b><br>
+            Admin: <b>admin</b> / <b>admin123</b><br>
+            Principal: <b>principal</b> / <b>principal123</b>
         </div>
 
     </div>
 </div>
 
 
-<!-- ================= APPLICATION ================= -->
+<!-- =========================================================
+     APPLICATION
+========================================================= -->
 
-<div id="app" class="app">
+<div id="app">
 
     <!-- SIDEBAR -->
 
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
 
-        <div class="school-title">
-
-            <div class="school-logo">
-                SAG
-            </div>
-
-            <h2>
-                SENIOR CHIEF ADANO DAY
-                SECONDARY SCHOOL
-            </h2>
-
-            <div id="roleText" class="user-role"></div>
-
+        <div class="brand">
+            <h2>SCAD DAY SECONDARY SCHOOL</h2>
+            <p>Attendance Management System</p>
         </div>
 
-        <div class="nav">
-
-            <button onclick="showPage('dashboard')" class="active">
-                Dashboard
-            </button>
-
-            <button id="navAttendance" onclick="showPage('attendance')">
-                Attendance
-            </button>
-
-            <button id="navLocation" onclick="showPage('location')">
-                Location Monitor
-            </button>
-
-            <button id="navTeachers" onclick="showPage('teachers')">
-                Teachers
-            </button>
-
-            <button id="navAdmins" onclick="showPage('admins')">
-                Administrators
-            </button>
-
-            <button id="navReports" onclick="showPage('reports')">
-                Reports
-            </button>
-
-            <button id="navCorrections" onclick="showPage('corrections')">
-                Corrections
-            </button>
-
-            <button id="navAudit" onclick="showPage('audit')">
-                Audit Log
-            </button>
-
-            <button id="navAI" onclick="showPage('ai')">
-                AI Intelligence
-            </button>
-
-            <button id="navSettings" onclick="showPage('settings')">
-                Settings
-            </button>
-
-            <button onclick="logout()">
-                Logout
-            </button>
-
-        </div>
+        <div class="nav" id="navigation"></div>
 
     </aside>
 
@@ -686,12 +675,24 @@ th{
 
         <header class="topbar">
 
-            <h2 id="topTitle">
-                Dashboard
-            </h2>
+            <div style="display:flex;align-items:center;gap:12px;">
+                <button class="mobile-menu" onclick="toggleSidebar()">☰</button>
 
-            <div>
-                <strong id="currentUserName"></strong>
+                <div class="topbar-title" id="pageTitle">
+                    Dashboard
+                </div>
+            </div>
+
+            <div class="user-info">
+
+                <span id="currentUserName"></span>
+
+                <span class="role-badge" id="currentUserRole"></span>
+
+                <button class="logout-btn" onclick="logout()">
+                    Logout
+                </button>
+
             </div>
 
         </header>
@@ -699,939 +700,834 @@ th{
 
         <div class="content">
 
+            <!-- =================================================
+                 DASHBOARD
+            ================================================= -->
 
-<!-- ================= DASHBOARD ================= -->
+            <section id="dashboardPage" class="page active">
 
-<section id="dashboard" class="page active">
+                <div class="cards">
 
-    <div class="page-title">
+                    <div class="card">
+                        <div class="card-label">Total Staff</div>
+                        <div class="card-value" id="dashTotalStaff">0</div>
+                    </div>
 
-        <h1>Dashboard</h1>
+                    <div class="card">
+                        <div class="card-label">Present Today</div>
+                        <div class="card-value" id="dashPresent">0</div>
+                    </div>
 
-        <p>
-            Overview of today's teachers attendance.
-        </p>
+                    <div class="card">
+                        <div class="card-label">Not Recorded</div>
+                        <div class="card-value" id="dashAbsent">0</div>
+                    </div>
 
-    </div>
+                    <div class="card">
+                        <div class="card-label">Outside Area</div>
+                        <div class="card-value" id="dashOutside">0</div>
+                    </div>
 
+                    <div class="card">
+                        <div class="card-label">Clocked Out</div>
+                        <div class="card-value" id="dashClockedOut">0</div>
+                    </div>
 
-    <div id="outsideAlert"></div>
+                    <div class="card">
+                        <div class="card-label">Still Clocked In</div>
+                        <div class="card-value" id="dashStillIn">0</div>
+                    </div>
 
+                    <div class="card">
+                        <div class="card-label">Automatic Clock-outs</div>
+                        <div class="card-value" id="dashAuto">0</div>
+                    </div>
 
-    <div class="cards">
+                </div>
 
-        <div class="card">
 
-            <div class="stat-label">
-                Total Staff
-            </div>
+                <div id="dashboardWarning"></div>
 
-            <div id="totalStaff" class="stat-value">
-                0
-            </div>
 
-        </div>
+                <div class="section">
 
+                    <h2>Today's Attendance</h2>
 
-        <div class="card">
+                    <div class="table-wrap">
 
-            <div class="stat-label">
-                Present
-            </div>
+                        <table>
 
-            <div id="presentStaff" class="stat-value">
-                0
-            </div>
+                            <thead>
+                                <tr>
+                                    <th>Teacher</th>
+                                    <th>Staff No.</th>
+                                    <th>Clock In</th>
+                                    <th>Clock Out</th>
+                                    <th>Status</th>
+                                    <th>Area</th>
+                                </tr>
+                            </thead>
 
-        </div>
+                            <tbody id="dashboardAttendanceTable"></tbody>
 
+                        </table>
 
-        <div class="card">
+                    </div>
 
-            <div class="stat-label">
-                Still Clocked In
-            </div>
+                </div>
 
-            <div id="stillIn" class="stat-value">
-                0
-            </div>
+            </section>
 
-        </div>
 
+            <!-- =================================================
+                 TEACHER ATTENDANCE
+            ================================================= -->
 
-        <div class="card">
+            <section id="attendancePage" class="page">
 
-            <div class="stat-label">
-                Clocked Out
-            </div>
+                <div class="section">
 
-            <div id="clockedOut" class="stat-value">
-                0
-            </div>
+                    <h2>My Daily Attendance</h2>
 
-        </div>
+                    <div class="clock-panel">
 
+                        <div>Current Nairobi Time</div>
 
-        <div class="card">
+                        <div class="clock" id="liveClock">
+                            --:--:--
+                        </div>
 
-            <div class="stat-label">
-                Outside Area
-            </div>
+                        <div id="teacherAttendanceStatus"></div>
 
-            <div id="outsideCount" class="stat-value">
-                0
-            </div>
+                        <div class="clock-actions">
 
-        </div>
+                            <button
+                                id="clockInButton"
+                                class="btn btn-success big-btn"
+                                onclick="teacherClockIn()">
+                                CLOCK IN
+                            </button>
 
+                            <button
+                                id="clockOutButton"
+                                class="btn btn-danger big-btn"
+                                onclick="teacherClockOut()"
+                                disabled>
+                                CLOCK OUT
+                            </button>
 
-        <div class="card">
+                        </div>
 
-            <div class="stat-label">
-                Automatic Clock-outs
-            </div>
+                    </div>
 
-            <div id="autoCount" class="stat-value">
-                0
-            </div>
+                    <div id="teacherGpsResult"></div>
 
-        </div>
+                </div>
 
-    </div>
 
+                <div class="section">
 
-    <div class="grid-2">
+                    <h2>My Attendance History</h2>
 
-        <div class="card">
+                    <div class="table-wrap">
 
-            <div class="card-header">
-                <h3>System Information</h3>
-            </div>
+                        <table>
 
-            <ul class="info-list">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Clock In</th>
+                                    <th>Clock Out</th>
+                                    <th>Clock-out Type</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
 
-                <li>
-                    <strong>School:</strong>
-                    SENIOR CHIEF ADANO DAY SECONDARY SCHOOL
-                </li>
+                            <tbody id="teacherHistoryTable"></tbody>
 
-                <li>
-                    <strong>Timezone:</strong>
-                    Africa/Nairobi
-                </li>
+                        </table>
 
-                <li>
-                    <strong>Auto Clock-out:</strong>
-                    11 hours after clock-in
-                </li>
+                    </div>
 
-                <li>
-                    <strong>Location:</strong>
-                    GPS enabled
-                </li>
+                </div>
 
-            </ul>
+            </section>
 
-        </div>
 
+            <!-- =================================================
+                 PROFILE
+            ================================================= -->
 
-        <div class="card">
+            <section id="profilePage" class="page">
 
-            <div class="card-header">
-                <h3>AI Intelligence</h3>
-            </div>
+                <div class="section">
 
-            <div id="aiSummary">
-                Attendance analysis will appear here.
-            </div>
+                    <h2>My Profile</h2>
 
-        </div>
+                    <div class="form-grid">
 
-    </div>
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input id="profileName" readonly>
+                        </div>
 
-</section>
+                        <div class="form-group">
+                            <label>Staff Number</label>
+                            <input id="profileStaffNo" readonly>
+                        </div>
 
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input id="profileUsername" readonly>
+                        </div>
 
-<!-- ================= TEACHER ATTENDANCE ================= -->
+                        <div class="form-group">
+                            <label>Department</label>
+                            <input id="profileDepartment">
+                        </div>
 
-<section id="attendance" class="page">
+                        <div class="form-group">
+                            <label>Subjects</label>
+                            <input id="profileSubjects">
+                        </div>
 
-    <div class="page-title">
+                        <div class="form-group">
+                            <label>Class Teacher?</label>
+                            <select id="profileClassTeacher">
+                                <option value="NO">No</option>
+                                <option value="YES">Yes</option>
+                            </select>
+                        </div>
 
-        <h1>Attendance</h1>
+                    </div>
 
-        <p>
-            Clock in and clock out using your current location.
-        </p>
+                    <div class="form-actions">
 
-    </div>
+                        <button class="btn btn-primary" onclick="saveTeacherProfile()">
+                            SAVE PROFILE
+                        </button>
 
+                    </div>
 
-    <div id="attendanceMessage"></div>
+                </div>
 
+            </section>
 
-    <div class="card clock-card">
 
-        <h2 id="teacherGreeting">
-            Attendance
-        </h2>
+            <!-- =================================================
+                 LOCATION MONITOR
+            ================================================= -->
 
-        <div id="liveTime" class="current-time">
-            00:00:00
-        </div>
+            <section id="locationPage" class="page">
 
-        <div id="liveDate" class="current-date">
-            Loading...
-        </div>
+                <div class="section">
 
+                    <h2>Location Monitor</h2>
 
-        <div class="location-box">
+                    <div class="gps-box">
 
-            <strong>GPS Location</strong>
+                        <div class="gps-grid">
 
-            <p id="gpsStatus">
-                GPS has not been requested.
-            </p>
+                            <div class="gps-item">
+                                <strong>School Latitude</strong>
+                                <span id="monitorSchoolLat"></span>
+                            </div>
 
-        </div>
+                            <div class="gps-item">
+                                <strong>School Longitude</strong>
+                                <span id="monitorSchoolLon"></span>
+                            </div>
 
+                            <div class="gps-item">
+                                <strong>Allowed Radius</strong>
+                                <span id="monitorRadius"></span>
+                            </div>
 
-        <div>
+                        </div>
 
-            <button
-                id="clockInButton"
-                class="btn btn-success"
-                onclick="clockIn()"
-            >
-                CLOCK IN
-            </button>
+                    </div>
 
-            <button
-                id="clockOutButton"
-                class="btn btn-danger"
-                onclick="clockOut()"
-                disabled
-            >
-                CLOCK OUT
-            </button>
+                </div>
 
-        </div>
 
-    </div>
+                <div class="section">
 
+                    <h2>Today's GPS Attendance</h2>
 
-    <div class="table-card">
+                    <div class="table-wrap">
 
-        <div class="card-header">
+                        <table>
 
-            <h3>
-                My Attendance
-            </h3>
+                            <thead>
 
-        </div>
+                                <tr>
+                                    <th>Teacher</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Teacher Latitude</th>
+                                    <th>Teacher Longitude</th>
+                                    <th>Accuracy</th>
+                                    <th>Distance</th>
+                                    <th>Direction</th>
+                                    <th>Area</th>
+                                </tr>
 
-        <table>
+                            </thead>
 
-            <thead>
+                            <tbody id="locationTable"></tbody>
 
-                <tr>
+                        </table>
 
-                    <th>Date</th>
-                    <th>Clock In</th>
-                    <th>Clock Out</th>
-                    <th>Clock-out Type</th>
-                    <th>Status</th>
+                    </div>
 
-                </tr>
+                </div>
 
-            </thead>
+            </section>
 
-            <tbody id="teacherAttendanceTable"></tbody>
 
-        </table>
+            <!-- =================================================
+                 TEACHERS
+            ================================================= -->
 
-    </div>
+            <section id="teachersPage" class="page">
 
-</section>
+                <div class="section">
 
+                    <h2>Teacher Management</h2>
 
-<!-- ================= LOCATION MONITOR ================= -->
+                    <div class="form-grid">
 
-<section id="location" class="page">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input id="newTeacherName">
+                        </div>
 
-    <div class="page-title">
+                        <div class="form-group">
+                            <label>Staff Number</label>
+                            <input id="newTeacherStaffNo">
+                        </div>
 
-        <h1>Location Monitor</h1>
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input id="newTeacherUsername">
+                        </div>
 
-        <p>
-            Detailed GPS monitoring for administrators.
-        </p>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input id="newTeacherPassword" type="password">
+                        </div>
 
-    </div>
+                        <div class="form-group">
+                            <label>Department</label>
+                            <input id="newTeacherDepartment">
+                        </div>
 
+                    </div>
 
-    <div class="alert alert-warning">
+                    <div class="form-actions">
 
-        Location information is restricted to authorized administrators.
+                        <button class="btn btn-primary" onclick="addTeacher()">
+                            ADD TEACHER
+                        </button>
 
-    </div>
+                    </div>
 
+                </div>
 
-    <div class="table-card">
 
-        <table>
+                <div class="section">
 
-            <thead>
+                    <h2>Registered Teachers</h2>
 
-                <tr>
+                    <div class="table-wrap">
 
-                    <th>Teacher</th>
-                    <th>Date</th>
-                    <th>Clock In</th>
-                    <th>GPS</th>
-                    <th>Distance</th>
-                    <th>Direction</th>
-                    <th>Accuracy</th>
-                    <th>Area</th>
+                        <table>
 
-                </tr>
+                            <thead>
 
-            </thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Staff Number</th>
+                                    <th>Username</th>
+                                    <th>Department</th>
+                                    <th>Class Teacher</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
 
-            <tbody id="locationTable"></tbody>
+                            </thead>
 
-        </table>
+                            <tbody id="teachersTable"></tbody>
 
-    </div>
+                        </table>
 
-</section>
+                    </div>
 
+                </div>
 
-<!-- ================= TEACHERS ================= -->
+            </section>
 
-<section id="teachers" class="page">
 
-    <div class="page-title">
+            <!-- =================================================
+                 ADMINISTRATORS
+            ================================================= -->
 
-        <h1>Teachers</h1>
+            <section id="adminsPage" class="page">
 
-        <p>
-            Manage teaching staff.
-        </p>
+                <div class="section">
 
-    </div>
+                    <h2>Administrator Management</h2>
 
+                    <div class="form-grid">
 
-    <div class="card">
+                        <div class="form-group">
+                            <label>Administrator Name</label>
+                            <input id="newAdminName">
+                        </div>
 
-        <div class="card-header">
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input id="newAdminUsername">
+                        </div>
 
-            <h3>Add Teacher</h3>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input id="newAdminPassword" type="password">
+                        </div>
 
-        </div>
+                    </div>
 
+                    <div class="form-actions">
 
-        <div class="grid-2">
+                        <button class="btn btn-primary" onclick="addAdmin()">
+                            ADD ADMINISTRATOR
+                        </button>
 
-            <div class="form-group">
+                    </div>
 
-                <label>Full Name</label>
+                </div>
 
-                <input id="newTeacherName"
-                       placeholder="Teacher full name">
 
-            </div>
+                <div class="section">
 
+                    <h2>Administrators</h2>
 
-            <div class="form-group">
+                    <div class="table-wrap">
 
-                <label>Staff Number</label>
+                        <table>
 
-                <input id="newTeacherStaff"
-                       placeholder="Staff number">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Username</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
 
-            </div>
+                            <tbody id="adminsTable"></tbody>
 
+                        </table>
 
-            <div class="form-group">
+                    </div>
 
-                <label>Username</label>
+                </div>
 
-                <input id="newTeacherUsername"
-                       placeholder="Username">
+            </section>
 
-            </div>
 
+            <!-- =================================================
+                 REPORTS
+            ================================================= -->
 
-            <div class="form-group">
+            <section id="reportsPage" class="page">
 
-                <label>Password</label>
+                <div class="section">
 
-                <input id="newTeacherPassword"
-                       placeholder="Password">
+                    <h2>Attendance Reports</h2>
 
-            </div>
+                    <div class="form-grid">
 
+                        <div class="form-group">
+                            <label>Start Date</label>
+                            <input type="date" id="reportStart">
+                        </div>
 
-            <div class="form-group">
+                        <div class="form-group">
+                            <label>End Date</label>
+                            <input type="date" id="reportEnd">
+                        </div>
 
-                <label>Department</label>
+                        <div class="form-group">
+                            <label>Teacher</label>
+                            <select id="reportTeacher">
+                                <option value="ALL">All Teachers</option>
+                            </select>
+                        </div>
 
-                <input id="newTeacherDepartment"
-                       placeholder="Department">
+                    </div>
 
-            </div>
+                    <div class="form-actions">
 
+                        <button class="btn btn-primary" onclick="generateReport()">
+                            GENERATE REPORT
+                        </button>
 
-            <div class="form-group">
+                        <button class="btn btn-light" onclick="exportCSV()">
+                            EXPORT CSV
+                        </button>
 
-                <label>Class Teacher?</label>
+                        <button class="btn btn-light" onclick="window.print()">
+                            PRINT / SAVE PDF
+                        </button>
 
-                <select id="newTeacherClass">
+                    </div>
 
-                    <option value="false">
-                        No
-                    </option>
+                </div>
 
-                    <option value="true">
-                        Yes
-                    </option>
 
-                </select>
+                <div class="section">
 
-            </div>
+                    <h2>Report Results</h2>
 
-        </div>
+                    <div class="table-wrap">
 
+                        <table>
 
-        <button class="btn btn-primary"
-                onclick="addTeacher()">
+                            <thead>
 
-            ADD TEACHER
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Teacher</th>
+                                    <th>Staff No.</th>
+                                    <th>Clock In</th>
+                                    <th>Clock Out</th>
+                                    <th>Clock-out Type</th>
+                                    <th>Area</th>
+                                    <th>Distance</th>
+                                    <th>Direction</th>
+                                </tr>
 
-        </button>
+                            </thead>
 
-    </div>
+                            <tbody id="reportTable"></tbody>
 
+                        </table>
 
-    <br>
+                    </div>
 
+                </div>
 
-    <div class="table-card">
+            </section>
 
-        <table>
 
-            <thead>
+            <!-- =================================================
+                 CORRECTIONS
+            ================================================= -->
 
-                <tr>
+            <section id="correctionsPage" class="page">
 
-                    <th>Name</th>
-                    <th>Staff Number</th>
-                    <th>Username</th>
-                    <th>Department</th>
-                    <th>Class Teacher</th>
-                    <th>Status</th>
+                <div class="section">
 
-                </tr>
+                    <h2>Attendance Corrections</h2>
 
-            </thead>
+                    <div class="warning">
+                        All corrections must have a reason. The original record must remain available in the audit trail.
+                    </div>
 
-            <tbody id="teachersTable"></tbody>
+                    <br>
 
-        </table>
+                    <div class="form-grid">
 
-    </div>
+                        <div class="form-group">
+                            <label>Attendance Record</label>
+                            <select id="correctionAttendance"></select>
+                        </div>
 
-</section>
+                        <div class="form-group">
+                            <label>Corrected Clock In</label>
+                            <input type="datetime-local" id="correctClockIn">
+                        </div>
 
+                        <div class="form-group">
+                            <label>Corrected Clock Out</label>
+                            <input type="datetime-local" id="correctClockOut">
+                        </div>
 
-<!-- ================= ADMINS ================= -->
+                        <div class="form-group">
+                            <label>Reason</label>
+                            <textarea id="correctionReason"></textarea>
+                        </div>
 
-<section id="admins" class="page">
+                    </div>
 
-    <div class="page-title">
+                    <div class="form-actions">
 
-        <h1>Administrators</h1>
+                        <button class="btn btn-warning" onclick="correctAttendance()">
+                            SAVE CORRECTION
+                        </button>
 
-        <p>
-            Manage system administrators.
-        </p>
+                    </div>
 
-    </div>
+                </div>
 
 
-    <div class="card">
+                <div class="section">
 
-        <h3>Add Administrator</h3>
+                    <h2>Correction History</h2>
 
-        <br>
+                    <div class="table-wrap">
 
-        <div class="grid-2">
+                        <table>
 
-            <div class="form-group">
+                            <thead>
 
-                <label>Name</label>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Teacher</th>
+                                    <th>Original</th>
+                                    <th>Corrected</th>
+                                    <th>Admin</th>
+                                    <th>Reason</th>
+                                </tr>
 
-                <input id="newAdminName">
+                            </thead>
 
-            </div>
+                            <tbody id="correctionsTable"></tbody>
 
-            <div class="form-group">
+                        </table>
 
-                <label>Username</label>
+                    </div>
 
-                <input id="newAdminUsername">
+                </div>
 
-            </div>
+            </section>
 
-            <div class="form-group">
 
-                <label>Password</label>
+            <!-- =================================================
+                 AUDIT LOG
+            ================================================= -->
 
-                <input id="newAdminPassword"
-                       type="password">
+            <section id="auditPage" class="page">
 
-            </div>
+                <div class="section">
 
-        </div>
+                    <h2>System Audit Log</h2>
 
-        <button class="btn btn-primary"
-                onclick="addAdmin()">
+                    <div class="table-wrap">
 
-            ADD ADMINISTRATOR
+                        <table>
 
-        </button>
+                            <thead>
 
-    </div>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>User</th>
+                                    <th>Action</th>
+                                    <th>Details</th>
+                                </tr>
 
-    <br>
+                            </thead>
 
-    <div class="table-card">
+                            <tbody id="auditTable"></tbody>
 
-        <table>
+                        </table>
 
-            <thead>
+                    </div>
 
-                <tr>
+                </div>
 
-                    <th>Name</th>
-                    <th>Username</th>
-                    <th>Role</th>
+            </section>
 
-                </tr>
 
-            </thead>
+            <!-- =================================================
+                 AI INTELLIGENCE
+            ================================================= -->
 
-            <tbody id="adminsTable"></tbody>
+            <section id="aiPage" class="page">
 
-        </table>
+                <div class="ai-box">
 
-    </div>
+                    <h2>AI Attendance Intelligence</h2>
 
-</section>
+                    <div class="ai-verdict" id="aiVerdict">
+                        Analysis not yet generated.
+                    </div>
 
+                    <p id="aiSummary"></p>
 
-<!-- ================= REPORTS ================= -->
+                </div>
 
-<section id="reports" class="page">
 
-    <div class="page-title">
+                <div class="section">
 
-        <h1>Attendance Reports</h1>
+                    <h2>AI Findings</h2>
 
-        <p>
-            View and print attendance information.
-        </p>
+                    <ul class="ai-list" id="aiFindings"></ul>
 
-    </div>
+                </div>
 
 
-    <div class="card no-print">
+                <div class="section">
 
-        <button class="btn btn-primary"
-                onclick="window.print()">
+                    <h2>Recommended Administrative Actions</h2>
 
-            PRINT / SAVE AS PDF
+                    <ul class="ai-list" id="aiRecommendations"></ul>
 
-        </button>
+                </div>
 
-        <button class="btn btn-success"
-                onclick="downloadCSV()">
+                <button class="btn btn-primary" onclick="runAIAnalysis()">
+                    RUN AI ANALYSIS
+                </button>
 
-            DOWNLOAD CSV
+            </section>
 
-        </button>
 
-    </div>
+            <!-- =================================================
+                 SETTINGS
+            ================================================= -->
 
-    <br>
+            <section id="settingsPage" class="page">
 
+                <div class="section">
 
-    <div class="table-card">
+                    <h2>School Location Settings</h2>
 
-        <table id="reportTable">
+                    <div class="success-box">
+                        <strong>Official school location</strong><br>
+                        These coordinates are used as the reference point for calculating attendance distance and direction.
+                    </div>
 
-            <thead>
+                    <br>
 
-                <tr>
+                    <div class="form-grid">
 
-                    <th>Teacher</th>
-                    <th>Staff Number</th>
-                    <th>Date</th>
-                    <th>Clock In</th>
-                    <th>Clock Out</th>
-                    <th>Type</th>
-                    <th>Status</th>
-                    <th>GPS</th>
-                    <th>Distance</th>
-                    <th>Direction</th>
-                    <th>Accuracy</th>
-                    <th>Area</th>
+                        <div class="form-group">
+                            <label>School Latitude</label>
+                            <input
+                                type="number"
+                                id="schoolLatitude"
+                                step="0.000001">
+                        </div>
 
-                </tr>
+                        <div class="form-group">
+                            <label>School Longitude</label>
+                            <input
+                                type="number"
+                                id="schoolLongitude"
+                                step="0.000001">
+                        </div>
 
-            </thead>
+                        <div class="form-group">
+                            <label>Allowed Radius (metres)</label>
+                            <input
+                                type="number"
+                                id="schoolRadius"
+                                min="1">
+                        </div>
 
-            <tbody id="reportsTableBody"></tbody>
+                    </div>
 
-        </table>
+                    <div class="form-actions">
 
-    </div>
+                        <button class="btn btn-primary" onclick="saveLocationSettings()">
+                            SAVE LOCATION
+                        </button>
 
-</section>
+                        <button class="btn btn-light" onclick="testCurrentLocation()">
+                            TEST MY LOCATION
+                        </button>
 
+                    </div>
 
-<!-- ================= CORRECTIONS ================= -->
+                    <div id="locationTestResult"></div>
 
-<section id="corrections" class="page">
+                </div>
 
-    <div class="page-title">
 
-        <h1>Attendance Corrections</h1>
+                <div class="section">
 
-        <p>
-            Administrative correction records.
-        </p>
+                    <h2>Automatic Clock-out Rule</h2>
 
-    </div>
+                    <div class="success-box">
+                        Every teacher who does not manually clock out will automatically be clocked out exactly <strong>11 hours</strong> after their clock-in time.
+                    </div>
 
+                </div>
 
-    <div class="alert alert-warning">
+            </section>
 
-        Every correction should have a reason and must be recorded.
 
-    </div>
+            <!-- =================================================
+                 PRINCIPAL OVERVIEW
+            ================================================= -->
 
+            <section id="principalPage" class="page">
 
-    <div class="table-card">
+                <div class="cards">
 
-        <table>
+                    <div class="card">
+                        <div class="card-label">Total Teachers</div>
+                        <div class="card-value" id="principalTotal">0</div>
+                    </div>
 
-            <thead>
+                    <div class="card">
+                        <div class="card-label">Present Today</div>
+                        <div class="card-value" id="principalPresent">0</div>
+                    </div>
 
-                <tr>
+                    <div class="card">
+                        <div class="card-label">Attendance Rate</div>
+                        <div class="card-value" id="principalRate">0%</div>
+                    </div>
 
-                    <th>Teacher</th>
-                    <th>Date</th>
-                    <th>Original</th>
-                    <th>Corrected</th>
-                    <th>Reason</th>
+                    <div class="card">
+                        <div class="card-label">Outside Area</div>
+                        <div class="card-value" id="principalOutside">0</div>
+                    </div>
 
-                </tr>
+                </div>
 
-            </thead>
 
-            <tbody id="correctionsTable"></tbody>
+                <div class="section">
 
-        </table>
+                    <h2>Principal Executive Summary</h2>
 
-    </div>
+                    <div id="principalSummary"></div>
 
-</section>
+                </div>
 
 
-<!-- ================= AUDIT ================= -->
+                <div class="section">
 
-<section id="audit" class="page">
+                    <h2>Today's Attendance Overview</h2>
 
-    <div class="page-title">
+                    <div class="table-wrap">
 
-        <h1>Audit Log</h1>
+                        <table>
 
-        <p>
-            System activity history.
-        </p>
+                            <thead>
 
-    </div>
+                                <tr>
+                                    <th>Teacher</th>
+                                    <th>Staff Number</th>
+                                    <th>Clock In</th>
+                                    <th>Clock Out</th>
+                                    <th>Status</th>
+                                </tr>
 
+                            </thead>
 
-    <div class="table-card">
+                            <tbody id="principalTable"></tbody>
 
-        <table>
+                        </table>
 
-            <thead>
+                    </div>
 
-                <tr>
+                </div>
 
-                    <th>Date</th>
-                    <th>Administrator</th>
-                    <th>Action</th>
-                    <th>Details</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody id="auditTable"></tbody>
-
-        </table>
-
-    </div>
-
-</section>
-
-
-<!-- ================= AI ================= -->
-
-<section id="ai" class="page">
-
-    <div class="page-title">
-
-        <h1>AI Intelligence Center</h1>
-
-        <p>
-            Attendance interpretation and decision support.
-        </p>
-
-    </div>
-
-
-    <div class="grid-2">
-
-        <div class="card">
-
-            <h3>Today's Verdict</h3>
-
-            <br>
-
-            <div id="aiVerdict"></div>
-
-        </div>
-
-
-        <div class="card">
-
-            <h3>Recommendations</h3>
-
-            <br>
-
-            <div id="aiRecommendations"></div>
-
-        </div>
-
-    </div>
-
-
-    <br>
-
-
-    <div class="card">
-
-        <h3>Ask Attendance Assistant</h3>
-
-        <br>
-
-        <input id="aiQuestion"
-               placeholder="Example: Who is outside the school area?">
-
-        <br><br>
-
-        <button class="btn btn-primary"
-                onclick="askAI()">
-
-            ANALYZE
-
-        </button>
-
-        <br><br>
-
-        <div id="aiAnswer"></div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= SETTINGS ================= -->
-
-<section id="settings" class="page">
-
-    <div class="page-title">
-
-        <h1>System Settings</h1>
-
-        <p>
-            Configure the school's attendance location.
-        </p>
-
-    </div>
-
-
-    <div class="card">
-
-        <div class="alert alert-info">
-
-            Enter the official school GPS coordinates here.
-            Do not use guessed coordinates.
-
-        </div>
-
-
-        <div class="grid-2">
-
-            <div class="form-group">
-
-                <label>School Latitude</label>
-
-                <input id="schoolLatitude"
-                       type="number"
-                       step="any">
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>School Longitude</label>
-
-                <input id="schoolLongitude"
-                       type="number"
-                       step="any">
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>Allowed Radius (metres)</label>
-
-                <input id="schoolRadius"
-                       type="number">
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>Automatic Clock-out</label>
-
-                <input value="11 hours"
-                       disabled>
-
-            </div>
-
-        </div>
-
-
-        <button class="btn btn-primary"
-                onclick="saveSettings()">
-
-            SAVE SETTINGS
-
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- ================= PRINCIPAL PAGE ================= -->
-
-<section id="principalOverview" class="page">
-
-    <div class="page-title">
-
-        <h1>Principal Overview</h1>
-
-        <p>
-            Executive attendance overview.
-        </p>
-
-    </div>
-
-
-    <div class="cards">
-
-        <div class="card">
-
-            <div class="stat-label">
-                Total Staff
-            </div>
-
-            <div id="principalTotal"
-                 class="stat-value">
-                0
-            </div>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="stat-label">
-                Present
-            </div>
-
-            <div id="principalPresent"
-                 class="stat-value">
-                0
-            </div>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="stat-label">
-                Outside Area
-            </div>
-
-            <div id="principalOutside"
-                 class="stat-value">
-                0
-            </div>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="stat-label">
-                Automatic Clock-outs
-            </div>
-
-            <div id="principalAuto"
-                 class="stat-value">
-                0
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="card">
-
-        <h3>Executive Summary</h3>
-
-        <br>
-
-        <div id="principalSummary"></div>
-
-    </div>
-
-</section>
-
+            </section>
 
         </div>
 
@@ -1642,115 +1538,166 @@ th{
 
 <script>
 
-/* =========================================================
-   BASIC DATABASE USING LOCAL STORAGE
-========================================================= */
+/* ============================================================
+   OFFICIAL SCHOOL LOCATION
+============================================================ */
 
-const SCHOOL_NAME =
-"SENIOR CHIEF ADANO DAY SECONDARY SCHOOL";
+const DEFAULT_SCHOOL_LOCATION = {
+    latitude: 1.735369,
+    longitude: 40.038490,
+    radius: 500
+};
 
-let users =
-JSON.parse(localStorage.getItem("sag_users")) || [
+
+/* ============================================================
+   DEMO USERS
+============================================================ */
+
+const defaultUsers = [
 
     {
-        id:"teacher1",
-        name:"Demo Teacher",
-        staff:"TCH-001",
+        id:"T001",
+        role:"TEACHER",
+        fullName:"Demo Teacher",
+        staffNo:"T001",
         username:"teacher",
         password:"teacher123",
-        role:"TEACHER",
         department:"Teaching",
-        classTeacher:false,
+        subjects:"",
+        classTeacher:"NO",
         status:"ACTIVE"
     },
 
     {
-        id:"admin1",
-        name:"System Administrator",
-        staff:"ADM-001",
+        id:"A001",
+        role:"ADMIN",
+        fullName:"System Administrator",
+        staffNo:"ADM001",
         username:"admin",
         password:"admin123",
-        role:"ADMIN",
         department:"Administration",
-        classTeacher:false,
         status:"ACTIVE"
     },
 
     {
-        id:"principal1",
-        name:"School Principal",
-        staff:"PRI-001",
+        id:"P001",
+        role:"PRINCIPAL",
+        fullName:"School Principal",
+        staffNo:"PR001",
         username:"principal",
         password:"principal123",
-        role:"PRINCIPAL",
         department:"Administration",
-        classTeacher:false,
         status:"ACTIVE"
     }
 
 ];
 
 
-let attendance =
-JSON.parse(localStorage.getItem("sag_attendance")) || [];
+/* ============================================================
+   DATABASE INITIALIZATION
+============================================================ */
 
-let auditLogs =
-JSON.parse(localStorage.getItem("sag_audit")) || [];
+function initializeDatabase(){
 
-let corrections =
-JSON.parse(localStorage.getItem("sag_corrections")) || [];
+    if(!localStorage.getItem("scad_users")){
+        localStorage.setItem(
+            "scad_users",
+            JSON.stringify(defaultUsers)
+        );
+    }
 
-let settings =
-JSON.parse(localStorage.getItem("sag_settings")) || {
+    if(!localStorage.getItem("scad_attendance")){
+        localStorage.setItem(
+            "scad_attendance",
+            JSON.stringify([])
+        );
+    }
 
-    latitude:null,
-    longitude:null,
-    radius:500,
-    autoHours:11
+    if(!localStorage.getItem("scad_audit")){
+        localStorage.setItem(
+            "scad_audit",
+            JSON.stringify([])
+        );
+    }
 
-};
+    if(!localStorage.getItem("scad_corrections")){
+        localStorage.setItem(
+            "scad_corrections",
+            JSON.stringify([])
+        );
+    }
+
+    if(!localStorage.getItem("scad_settings")){
+
+        localStorage.setItem(
+            "scad_settings",
+            JSON.stringify(DEFAULT_SCHOOL_LOCATION)
+        );
+
+    }
+
+}
+
+initializeDatabase();
 
 
-let currentUser = null;
+/* ============================================================
+   DATABASE HELPERS
+============================================================ */
 
+function getUsers(){
+    return JSON.parse(localStorage.getItem("scad_users") || "[]");
+}
 
-/* =========================================================
-   SAVE DATABASE
-========================================================= */
+function saveUsers(users){
+    localStorage.setItem("scad_users",JSON.stringify(users));
+}
 
-function saveDatabase(){
+function getAttendance(){
+    return JSON.parse(localStorage.getItem("scad_attendance") || "[]");
+}
 
-    localStorage.setItem(
-        "sag_users",
-        JSON.stringify(users)
-    );
+function saveAttendance(data){
+    localStorage.setItem("scad_attendance",JSON.stringify(data));
+}
 
-    localStorage.setItem(
-        "sag_attendance",
-        JSON.stringify(attendance)
-    );
+function getAudit(){
+    return JSON.parse(localStorage.getItem("scad_audit") || "[]");
+}
 
-    localStorage.setItem(
-        "sag_audit",
-        JSON.stringify(auditLogs)
-    );
+function saveAudit(data){
+    localStorage.setItem("scad_audit",JSON.stringify(data));
+}
 
-    localStorage.setItem(
-        "sag_corrections",
-        JSON.stringify(corrections)
-    );
+function getCorrections(){
+    return JSON.parse(localStorage.getItem("scad_corrections") || "[]");
+}
 
-    localStorage.setItem(
-        "sag_settings",
-        JSON.stringify(settings)
+function saveCorrections(data){
+    localStorage.setItem("scad_corrections",JSON.stringify(data));
+}
+
+function getSettings(){
+
+    return JSON.parse(
+        localStorage.getItem("scad_settings")
+        ||
+        JSON.stringify(DEFAULT_SCHOOL_LOCATION)
     );
 
 }
 
 
-/* =========================================================
+/* ============================================================
+   CURRENT USER
+============================================================ */
+
+let currentUser = null;
+
+
+/* ============================================================
    LOGIN
-========================================================= */
+============================================================ */
 
 function login(){
 
@@ -1760,320 +1707,274 @@ function login(){
     const password =
         document.getElementById("loginPassword").value;
 
-    const user =
-        users.find(
-            u =>
-            u.username === username &&
-            u.password === password &&
-            u.status === "ACTIVE"
-        );
+    const users = getUsers();
+
+    const user = users.find(
+        u =>
+        u.username === username &&
+        u.password === password &&
+        u.status === "ACTIVE"
+    );
 
     if(!user){
 
-        document.getElementById("loginError").textContent =
-        "Invalid username or password.";
+        document.getElementById("loginMessage").innerHTML =
+        `
+        <div class="danger-box" style="margin-top:15px;">
+            Invalid username or password.
+        </div>
+        `;
 
         return;
-
     }
 
     currentUser = user;
 
-    document.getElementById("loginScreen").style.display =
-    "none";
-
-    document.getElementById("app").style.display =
-    "block";
-
-    document.getElementById("currentUserName").textContent =
-    user.name;
-
-    document.getElementById("roleText").textContent =
-    user.role;
-
-    configureRole();
-
-    updateDashboard();
-
-    startClock();
-
-}
-
-
-/* =========================================================
-   ROLE CONFIGURATION
-========================================================= */
-
-function configureRole(){
-
-    const role = currentUser.role;
-
-    const navAttendance =
-        document.getElementById("navAttendance");
-
-    const navLocation =
-        document.getElementById("navLocation");
-
-    const navTeachers =
-        document.getElementById("navTeachers");
-
-    const navAdmins =
-        document.getElementById("navAdmins");
-
-    const navReports =
-        document.getElementById("navReports");
-
-    const navCorrections =
-        document.getElementById("navCorrections");
-
-    const navAudit =
-        document.getElementById("navAudit");
-
-    const navAI =
-        document.getElementById("navAI");
-
-    const navSettings =
-        document.getElementById("navSettings");
-
-
-    if(role === "TEACHER"){
-
-        navAttendance.style.display = "block";
-
-        navLocation.style.display = "none";
-        navTeachers.style.display = "none";
-        navAdmins.style.display = "none";
-        navReports.style.display = "none";
-        navCorrections.style.display = "none";
-        navAudit.style.display = "none";
-        navAI.style.display = "none";
-        navSettings.style.display = "none";
-
-        showPage("attendance");
-
-    }
-
-
-    else if(role === "ADMIN"){
-
-        navAttendance.style.display = "block";
-        navLocation.style.display = "block";
-        navTeachers.style.display = "block";
-        navAdmins.style.display = "block";
-        navReports.style.display = "block";
-        navCorrections.style.display = "block";
-        navAudit.style.display = "block";
-        navAI.style.display = "block";
-        navSettings.style.display = "block";
-
-        showPage("dashboard");
-
-    }
-
-
-    else if(role === "PRINCIPAL"){
-
-        navAttendance.style.display = "none";
-        navLocation.style.display = "none";
-        navTeachers.style.display = "none";
-        navAdmins.style.display = "none";
-        navReports.style.display = "block";
-        navCorrections.style.display = "none";
-        navAudit.style.display = "none";
-        navAI.style.display = "none";
-        navSettings.style.display = "none";
-
-        showPage("principalOverview");
-
-    }
-
-}
-
-
-/* =========================================================
-   PAGE NAVIGATION
-========================================================= */
-
-function showPage(page){
-
-    document
-    .querySelectorAll(".page")
-    .forEach(
-        p => p.classList.remove("active")
+    localStorage.setItem(
+        "scad_current_user",
+        JSON.stringify(user)
     );
 
+    document.getElementById("loginScreen").style.display = "none";
 
-    const target =
-        document.getElementById(page);
+    document.getElementById("app").style.display = "block";
 
-    if(target){
+    setupInterface();
 
-        target.classList.add("active");
-
-    }
-
-
-    document
-    .querySelectorAll(".nav button")
-    .forEach(
-        b => b.classList.remove("active")
+    addAudit(
+        currentUser.username,
+        "LOGIN",
+        "User logged into the system."
     );
-
-
-    if(page === "dashboard")
-        document.getElementById("topTitle").textContent =
-        "Dashboard";
-
-    if(page === "attendance")
-        document.getElementById("topTitle").textContent =
-        "Attendance";
-
-    if(page === "location")
-        document.getElementById("topTitle").textContent =
-        "Location Monitor";
-
-    if(page === "teachers")
-        document.getElementById("topTitle").textContent =
-        "Teachers";
-
-    if(page === "admins")
-        document.getElementById("topTitle").textContent =
-        "Administrators";
-
-    if(page === "reports")
-        document.getElementById("topTitle").textContent =
-        "Reports";
-
-    if(page === "corrections")
-        document.getElementById("topTitle").textContent =
-        "Corrections";
-
-    if(page === "audit")
-        document.getElementById("topTitle").textContent =
-        "Audit Log";
-
-    if(page === "ai")
-        document.getElementById("topTitle").textContent =
-        "AI Intelligence";
-
-    if(page === "settings")
-        document.getElementById("topTitle").textContent =
-        "Settings";
-
-    if(page === "principalOverview")
-        document.getElementById("topTitle").textContent =
-        "Principal Overview";
-
-
-    refreshTables();
 
 }
 
-
-/* =========================================================
-   LOGOUT
-========================================================= */
 
 function logout(){
 
+    if(currentUser){
+
+        addAudit(
+            currentUser.username,
+            "LOGOUT",
+            "User logged out."
+        );
+
+    }
+
     currentUser = null;
 
-    document.getElementById("app").style.display =
-    "none";
+    localStorage.removeItem("scad_current_user");
 
-    document.getElementById("loginScreen").style.display =
-    "flex";
+    document.getElementById("app").style.display = "none";
+
+    document.getElementById("loginScreen").style.display = "flex";
 
     document.getElementById("loginUsername").value = "";
+
     document.getElementById("loginPassword").value = "";
 
 }
 
 
-/* =========================================================
-   CLOCK
-========================================================= */
+function restoreSession(){
 
-function startClock(){
+    const saved =
+        localStorage.getItem("scad_current_user");
 
-    updateClock();
+    if(!saved) return;
 
-    setInterval(updateClock,1000);
+    const savedUser = JSON.parse(saved);
 
-}
+    const users = getUsers();
 
-function updateClock(){
+    const user = users.find(
+        u => u.id === savedUser.id
+    );
 
-    const now = new Date();
+    if(user && user.status === "ACTIVE"){
 
-    const time =
-        now.toLocaleTimeString(
-            "en-KE",
-            {
-                timeZone:"Africa/Nairobi",
-                hour12:false
-            }
-        );
+        currentUser = user;
 
-    const date =
-        now.toLocaleDateString(
-            "en-KE",
-            {
-                timeZone:"Africa/Nairobi",
-                weekday:"long",
-                year:"numeric",
-                month:"long",
-                day:"numeric"
-            }
-        );
+        document.getElementById("loginScreen").style.display = "none";
 
-    const timeElement =
-        document.getElementById("liveTime");
+        document.getElementById("app").style.display = "block";
 
-    const dateElement =
-        document.getElementById("liveDate");
+        setupInterface();
 
-    if(timeElement)
-        timeElement.textContent = time;
-
-    if(dateElement)
-        dateElement.textContent = date;
+    }
 
 }
 
+restoreSession();
 
-/* =========================================================
-   DATE
-========================================================= */
 
-function getToday(){
+/* ============================================================
+   NAVIGATION
+============================================================ */
 
-    const now = new Date();
+function setupInterface(){
 
-    return now.toLocaleDateString(
+    document.getElementById("currentUserName").textContent =
+        currentUser.fullName;
+
+    document.getElementById("currentUserRole").textContent =
+        currentUser.role;
+
+    buildNavigation();
+
+    showPage(
+        currentUser.role === "TEACHER"
+        ? "attendancePage"
+        : currentUser.role === "PRINCIPAL"
+        ? "principalPage"
+        : "dashboardPage"
+    );
+
+    refreshAll();
+
+}
+
+
+function buildNavigation(){
+
+    const nav =
+        document.getElementById("navigation");
+
+    nav.innerHTML = "";
+
+    if(currentUser.role === "TEACHER"){
+
+        addNavButton("attendancePage","Attendance");
+
+        addNavButton("profilePage","My Profile");
+
+    }
+
+
+    if(currentUser.role === "ADMIN"){
+
+        addNavButton("dashboardPage","Dashboard");
+
+        addNavButton("attendancePage","Attendance");
+
+        addNavButton("locationPage","Location Monitor");
+
+        addNavButton("teachersPage","Teachers");
+
+        addNavButton("adminsPage","Administrators");
+
+        addNavButton("reportsPage","Reports");
+
+        addNavButton("correctionsPage","Corrections");
+
+        addNavButton("auditPage","Audit Log");
+
+        addNavButton("aiPage","AI Intelligence");
+
+        addNavButton("settingsPage","Settings");
+
+    }
+
+
+    if(currentUser.role === "PRINCIPAL"){
+
+        addNavButton("principalPage","Principal Overview");
+
+        addNavButton("reportsPage","Reports");
+
+    }
+
+}
+
+
+function addNavButton(pageId,label){
+
+    const nav =
+        document.getElementById("navigation");
+
+    const button =
+        document.createElement("button");
+
+    button.textContent = label;
+
+    button.onclick = function(){
+
+        showPage(pageId);
+
+        document.getElementById("sidebar")
+            .classList.remove("open");
+
+    };
+
+    nav.appendChild(button);
+
+}
+
+
+function showPage(pageId){
+
+    document
+        .querySelectorAll(".page")
+        .forEach(p => p.classList.remove("active"));
+
+    const page =
+        document.getElementById(pageId);
+
+    if(page){
+
+        page.classList.add("active");
+
+        const title =
+            page.querySelector("h2");
+
+        document.getElementById("pageTitle").textContent =
+            title ? title.textContent : "Dashboard";
+
+    }
+
+    refreshAll();
+
+}
+
+
+function toggleSidebar(){
+
+    document
+        .getElementById("sidebar")
+        .classList.toggle("open");
+
+}
+
+
+/* ============================================================
+   TIME
+============================================================ */
+
+function getNairobiDate(){
+
+    return new Date().toLocaleString(
         "en-CA",
         {
-            timeZone:"Africa/Nairobi"
+            timeZone:"Africa/Nairobi",
+            year:"numeric",
+            month:"2-digit",
+            day:"2-digit"
         }
     );
 
 }
 
 
-/* =========================================================
-   FORMAT TIME
-========================================================= */
+function getNairobiDateTime(){
 
-function formatTime(value){
-
-    if(!value)
-        return "—";
-
-    return new Date(value)
-    .toLocaleTimeString(
-        "en-KE",
+    return new Date().toLocaleString(
+        "en-GB",
         {
             timeZone:"Africa/Nairobi",
+            year:"numeric",
+            month:"2-digit",
+            day:"2-digit",
             hour:"2-digit",
             minute:"2-digit",
             second:"2-digit",
@@ -2084,80 +1985,113 @@ function formatTime(value){
 }
 
 
-/* =========================================================
-   GPS
-========================================================= */
+function formatDateTime(iso){
 
-function getLocation(){
+    if(!iso) return "-";
 
-    return new Promise(
-        (resolve,reject)=>{
-
-            if(!navigator.geolocation){
-
-                reject(
-                    new Error(
-                        "This browser does not support GPS."
-                    )
-                );
-
-                return;
-
-            }
-
-
-            navigator.geolocation.getCurrentPosition(
-
-                position=>{
-
-                    resolve({
-
-                        latitude:
-                        position.coords.latitude,
-
-                        longitude:
-                        position.coords.longitude,
-
-                        accuracy:
-                        position.coords.accuracy
-
-                    });
-
-                },
-
-                error=>{
-
-                    reject(
-                        new Error(
-                            "GPS permission was denied or location could not be obtained."
-                        )
-                    );
-
-                },
-
-                {
-
-                    enableHighAccuracy:true,
-
-                    timeout:15000,
-
-                    maximumAge:0
-
-                }
-
-            );
-
+    return new Date(iso).toLocaleString(
+        "en-KE",
+        {
+            timeZone:"Africa/Nairobi",
+            dateStyle:"medium",
+            timeStyle:"medium"
         }
     );
 
 }
 
 
-/* =========================================================
-   HAVERSINE DISTANCE
-========================================================= */
+function updateClock(){
 
-function distanceMeters(
+    const el =
+        document.getElementById("liveClock");
+
+    if(!el) return;
+
+    el.textContent =
+        new Date().toLocaleTimeString(
+            "en-KE",
+            {
+                timeZone:"Africa/Nairobi",
+                hour12:false
+            }
+        );
+
+}
+
+setInterval(updateClock,1000);
+
+updateClock();
+
+
+/* ============================================================
+   11 HOUR AUTO CLOCK OUT
+============================================================ */
+
+function processAutomaticClockOuts(){
+
+    const attendance = getAttendance();
+
+    let changed = false;
+
+    const now = Date.now();
+
+    attendance.forEach(record => {
+
+        if(
+            record.clockIn &&
+            !record.clockOut
+        ){
+
+            const clockInTime =
+                new Date(record.clockIn).getTime();
+
+            const automaticTime =
+                clockInTime + (11 * 60 * 60 * 1000);
+
+            if(now >= automaticTime){
+
+                record.clockOut =
+                    new Date(automaticTime).toISOString();
+
+                record.clockOutType =
+                    "AUTO_11_HOUR";
+
+                record.status =
+                    "CLOCKED_OUT";
+
+                changed = true;
+
+                addAudit(
+                    "SYSTEM",
+                    "AUTO_CLOCK_OUT",
+                    `${record.teacherName} automatically clocked out after exactly 11 hours.`
+                );
+
+            }
+
+        }
+
+    });
+
+    if(changed){
+
+        saveAttendance(attendance);
+
+    }
+
+}
+
+setInterval(processAutomaticClockOuts,30000);
+
+processAutomaticClockOuts();
+
+
+/* ============================================================
+   HAVERSINE DISTANCE
+============================================================ */
+
+function calculateDistance(
     lat1,
     lon1,
     lat2,
@@ -2166,24 +2100,24 @@ function distanceMeters(
 
     const R = 6371000;
 
-    const toRad =
+    const toRadians =
         degrees =>
         degrees * Math.PI / 180;
 
     const dLat =
-        toRad(lat2-lat1);
+        toRadians(lat2-lat1);
 
     const dLon =
-        toRad(lon2-lon1);
+        toRadians(lon2-lon1);
 
     const a =
-        Math.sin(dLat/2) *
-        Math.sin(dLat/2) +
-
-        Math.cos(toRad(lat1)) *
-        Math.cos(toRad(lat2)) *
-        Math.sin(dLon/2) *
-        Math.sin(dLon/2);
+        Math.sin(dLat/2) ** 2
+        +
+        Math.cos(toRadians(lat1))
+        *
+        Math.cos(toRadians(lat2))
+        *
+        Math.sin(dLon/2) ** 2;
 
     const c =
         2 *
@@ -2197,59 +2131,50 @@ function distanceMeters(
 }
 
 
-/* =========================================================
-   BEARING
-========================================================= */
+/* ============================================================
+   COMPASS DIRECTION
+============================================================ */
 
-function bearingDegrees(
-    lat1,
-    lon1,
-    lat2,
-    lon2
+function calculateDirection(
+    schoolLat,
+    schoolLon,
+    teacherLat,
+    teacherLon
 ){
 
-    const toRad =
-        degrees =>
-        degrees * Math.PI / 180;
+    const lat1 =
+        schoolLat * Math.PI / 180;
 
-    const toDeg =
-        radians =>
-        radians * 180 / Math.PI;
+    const lat2 =
+        teacherLat * Math.PI / 180;
 
-    const p1 =
-        toRad(lat1);
-
-    const p2 =
-        toRad(lat2);
-
-    const dl =
-        toRad(lon2-lon1);
+    const dLon =
+        (teacherLon-schoolLon)
+        * Math.PI / 180;
 
     const y =
-        Math.sin(dl) *
-        Math.cos(p2);
+        Math.sin(dLon)
+        *
+        Math.cos(lat2);
 
     const x =
-        Math.cos(p1) *
-        Math.sin(p2) -
-        Math.sin(p1) *
-        Math.cos(p2) *
-        Math.cos(dl);
+        Math.cos(lat1)
+        *
+        Math.sin(lat2)
+        -
+        Math.sin(lat1)
+        *
+        Math.cos(lat2)
+        *
+        Math.cos(dLon);
 
-    return (
-        toDeg(
-            Math.atan2(y,x)
-        ) + 360
-    ) % 360;
+    let bearing =
+        Math.atan2(y,x)
+        *
+        180 / Math.PI;
 
-}
-
-
-/* =========================================================
-   COMPASS DIRECTION
-========================================================= */
-
-function directionFromBearing(bearing){
+    bearing =
+        (bearing+360)%360;
 
     const directions = [
 
@@ -2265,253 +2190,282 @@ function directionFromBearing(bearing){
     ];
 
     const index =
-        Math.round(
-            bearing / 45
-        ) % 8;
+        Math.round(bearing/45)%8;
 
     return directions[index];
 
 }
 
 
-/* =========================================================
-   CLOCK IN
-========================================================= */
+/* ============================================================
+   GPS LOCATION PROCESSOR
+============================================================ */
 
-async function clockIn(){
+function processTeacherLocation(position){
 
-    if(currentUser.role !== "TEACHER")
-        return;
+    const settings =
+        getSettings();
 
+    const teacherLat =
+        position.coords.latitude;
 
-    const today =
-        getToday();
+    const teacherLon =
+        position.coords.longitude;
 
+    const accuracy =
+        position.coords.accuracy;
 
-    const existing =
-        attendance.find(
-            a =>
-            a.userId === currentUser.id &&
-            a.date === today
-        );
-
-
-    if(existing){
-
-        showMessage(
-            "attendanceMessage",
-            "You have already clocked in today.",
-            "warning"
-        );
-
-        return;
-
-    }
-
-
-    document.getElementById("gpsStatus").textContent =
-    "Requesting your GPS location...";
-
-
-    try{
-
-        const gps =
-            await getLocation();
-
-
-        document.getElementById("gpsStatus").textContent =
-        "GPS location captured successfully.";
-
-
-        let distance = null;
-        let direction = "UNKNOWN";
-        let areaStatus = "UNKNOWN";
-
-
-        if(
-            settings.latitude !== null &&
-            settings.longitude !== null
-        ){
-
-            distance =
-                distanceMeters(
-                    settings.latitude,
-                    settings.longitude,
-                    gps.latitude,
-                    gps.longitude
-                );
-
-
-            const bearing =
-                bearingDegrees(
-                    settings.latitude,
-                    settings.longitude,
-                    gps.latitude,
-                    gps.longitude
-                );
-
-
-            direction =
-                directionFromBearing(bearing);
-
-
-            areaStatus =
-                distance <= settings.radius
-                ? "WITHIN"
-                : "OUTSIDE";
-
-        }
-
-
-        const now =
-            new Date();
-
-
-        const record = {
-
-            id:
-            "ATT-" +
-            Date.now(),
-
-            userId:
-            currentUser.id,
-
-            teacher:
-            currentUser.name,
-
-            staff:
-            currentUser.staff,
-
-            date:
-            today,
-
-            clockIn:
-            now.toISOString(),
-
-            clockOut:null,
-
-            clockOutType:null,
-
-            latitude:
-            gps.latitude,
-
-            longitude:
-            gps.longitude,
-
-            accuracy:
-            gps.accuracy,
-
-            schoolLatitude:
+    const distance =
+        calculateDistance(
             settings.latitude,
-
-            schoolLongitude:
             settings.longitude,
-
-            distance:
-            distance,
-
-            direction:
-            direction,
-
-            areaStatus:
-            areaStatus,
-
-            status:
-            "PRESENT"
-
-        };
-
-
-        attendance.push(record);
-
-        saveDatabase();
-
-
-        addAudit(
-            "Teacher clock-in",
-            currentUser.name +
-            " clocked in."
+            teacherLat,
+            teacherLon
         );
 
-
-        showMessage(
-            "attendanceMessage",
-            "Clock-in successful. Your attendance has been recorded.",
-            "success"
+    const direction =
+        calculateDirection(
+            settings.latitude,
+            settings.longitude,
+            teacherLat,
+            teacherLon
         );
 
+    const areaStatus =
+        distance <= settings.radius
+        ? "WITHIN"
+        : "OUTSIDE";
 
-        updateTeacherButtons();
+    return {
 
-        refreshTables();
+        teacherLatitude:teacherLat,
 
-        updateDashboard();
+        teacherLongitude:teacherLon,
 
-    }
+        accuracy:accuracy,
 
-    catch(error){
+        schoolLatitude:settings.latitude,
 
-        document.getElementById("gpsStatus").textContent =
-        error.message;
+        schoolLongitude:settings.longitude,
 
-        showMessage(
-            "attendanceMessage",
-            error.message,
-            "danger"
-        );
+        distance:Math.round(distance),
 
-    }
+        direction:direction,
+
+        areaStatus:areaStatus
+
+    };
 
 }
 
 
-/* =========================================================
-   CLOCK OUT
-========================================================= */
+/* ============================================================
+   TEACHER CLOCK IN
+============================================================ */
 
-function clockOut(){
+function teacherClockIn(){
 
-    if(!currentUser)
+    if(currentUser.role !== "TEACHER"){
         return;
+    }
 
+    const attendance =
+        getAttendance();
 
     const today =
-        getToday();
+        getNairobiDate();
 
+    const existing =
+        attendance.find(
+            a =>
+            a.teacherId === currentUser.id &&
+            a.date === today &&
+            a.clockIn
+        );
+
+    if(existing){
+
+        alert("You have already clocked in today.");
+
+        return;
+    }
+
+    if(!navigator.geolocation){
+
+        alert(
+            "This browser does not support GPS location."
+        );
+
+        return;
+    }
+
+    const button =
+        document.getElementById("clockInButton");
+
+    button.disabled = true;
+
+    button.textContent =
+        "GETTING GPS...";
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position){
+
+            const locationData =
+                processTeacherLocation(position);
+
+            const now =
+                new Date();
+
+            const record = {
+
+                id:
+                    "ATT-" +
+                    Date.now(),
+
+                teacherId:
+                    currentUser.id,
+
+                teacherName:
+                    currentUser.fullName,
+
+                staffNo:
+                    currentUser.staffNo,
+
+                date:
+                    today,
+
+                clockIn:
+                    now.toISOString(),
+
+                clockOut:
+                    null,
+
+                clockOutType:
+                    null,
+
+                status:
+                    "CLOCKED_IN",
+
+                teacherLatitude:
+                    locationData.teacherLatitude,
+
+                teacherLongitude:
+                    locationData.teacherLongitude,
+
+                accuracy:
+                    locationData.accuracy,
+
+                schoolLatitude:
+                    locationData.schoolLatitude,
+
+                schoolLongitude:
+                    locationData.schoolLongitude,
+
+                distance:
+                    locationData.distance,
+
+                direction:
+                    locationData.direction,
+
+                areaStatus:
+                    locationData.areaStatus,
+
+                correction:
+                    null
+
+            };
+
+            attendance.push(record);
+
+            saveAttendance(attendance);
+
+            addAudit(
+                currentUser.username,
+                "CLOCK_IN",
+                `Teacher clocked in. Area: ${record.areaStatus}, Distance: ${record.distance}m, Direction: ${record.direction}.`
+            );
+
+            showTeacherGpsResult(record);
+
+            button.textContent =
+                "CLOCKED IN";
+
+            refreshAll();
+
+        },
+
+        function(error){
+
+            button.disabled = false;
+
+            button.textContent =
+                "CLOCK IN";
+
+            let message =
+                "Unable to obtain your location.";
+
+            if(error.code === 1){
+                message =
+                    "Location permission was denied. Please allow location access.";
+            }
+
+            if(error.code === 2){
+                message =
+                    "Your location could not be determined. Check GPS/location.";
+            }
+
+            if(error.code === 3){
+                message =
+                    "GPS request timed out. Please try again.";
+            }
+
+            alert(message);
+
+        },
+
+        {
+
+            enableHighAccuracy:true,
+
+            timeout:20000,
+
+            maximumAge:0
+
+        }
+
+    );
+
+}
+
+
+/* ============================================================
+   TEACHER CLOCK OUT
+============================================================ */
+
+function teacherClockOut(){
+
+    const attendance =
+        getAttendance();
+
+    const today =
+        getNairobiDate();
 
     const record =
         attendance.find(
             a =>
-            a.userId === currentUser.id &&
-            a.date === today
+            a.teacherId === currentUser.id &&
+            a.date === today &&
+            a.clockIn &&
+            !a.clockOut
         );
-
 
     if(!record){
 
-        showMessage(
-            "attendanceMessage",
-            "You have not clocked in today.",
-            "warning"
-        );
+        alert("You do not have an active clock-in.");
 
         return;
-
     }
-
-
-    if(record.clockOut){
-
-        showMessage(
-            "attendanceMessage",
-            "You have already clocked out.",
-            "warning"
-        );
-
-        return;
-
-    }
-
 
     record.clockOut =
         new Date().toISOString();
@@ -2519,1460 +2473,1262 @@ function clockOut(){
     record.clockOutType =
         "MANUAL";
 
+    record.status =
+        "CLOCKED_OUT";
 
-    saveDatabase();
-
+    saveAttendance(attendance);
 
     addAudit(
-        "Manual clock-out",
-        currentUser.name +
-        " clocked out."
+        currentUser.username,
+        "CLOCK_OUT",
+        "Teacher manually clocked out."
     );
 
-
-    showMessage(
-        "attendanceMessage",
-        "Clock-out successful.",
-        "success"
-    );
-
-
-    updateTeacherButtons();
-
-    refreshTables();
-
-    updateDashboard();
+    refreshAll();
 
 }
 
 
-/* =========================================================
-   AUTOMATIC 11 HOUR CLOCK OUT
-========================================================= */
+/* ============================================================
+   TEACHER GPS RESULT
+============================================================ */
 
-function processAutomaticClockOuts(){
+function showTeacherGpsResult(record){
 
-    const now =
-        Date.now();
+    const box =
+        document.getElementById("teacherGpsResult");
 
+    const statusClass =
+        record.areaStatus === "WITHIN"
+        ? "success-box"
+        : "warning";
 
-    attendance.forEach(record=>{
+    box.innerHTML = `
 
-        if(
-            record.clockIn &&
-            !record.clockOut
-        ){
+        <div class="${statusClass}">
 
-            const clockInTime =
-                new Date(
-                    record.clockIn
-                ).getTime();
+            <strong>
+                Clock-in recorded successfully.
+            </strong>
 
+            <br><br>
 
-            const limit =
-                settings.autoHours *
-                60 *
-                60 *
-                1000;
+            Attendance has been recorded.
 
+            <br><br>
 
-            if(
-                now - clockInTime >= limit
-            ){
+            Area status:
+            <strong>${record.areaStatus}</strong>
 
-                record.clockOut =
-                    new Date(
-                        clockInTime + limit
-                    ).toISOString();
+        </div>
 
-
-                record.clockOutType =
-                    "AUTO_11_HOUR";
-
-
-                addAudit(
-                    "Automatic clock-out",
-                    record.teacher +
-                    " was automatically clocked out after " +
-                    settings.autoHours +
-                    " hours."
-                );
-
-            }
-
-        }
-
-    });
-
-
-    saveDatabase();
-
-}
-
-
-/* =========================================================
-   UPDATE TEACHER BUTTONS
-========================================================= */
-
-function updateTeacherButtons(){
-
-    if(!currentUser ||
-       currentUser.role !== "TEACHER")
-       return;
-
-
-    const today =
-        getToday();
-
-
-    const record =
-        attendance.find(
-            a =>
-            a.userId === currentUser.id &&
-            a.date === today
-        );
-
-
-    const inButton =
-        document.getElementById(
-            "clockInButton"
-        );
-
-    const outButton =
-        document.getElementById(
-            "clockOutButton"
-        );
-
-
-    if(!record){
-
-        inButton.disabled = false;
-        outButton.disabled = true;
-
-        return;
-
-    }
-
-
-    if(record.clockOut){
-
-        inButton.disabled = true;
-        outButton.disabled = true;
-
-        return;
-
-    }
-
-
-    inButton.disabled = true;
-    outButton.disabled = false;
-
-}
-
-
-/* =========================================================
-   MESSAGE
-========================================================= */
-
-function showMessage(
-    element,
-    message,
-    type
-){
-
-    const el =
-        document.getElementById(element);
-
-    if(!el)
-        return;
-
-
-    el.innerHTML =
-    `
-    <div class="alert alert-${type}">
-        ${message}
-    </div>
     `;
 
 }
 
 
-/* =========================================================
+/* ============================================================
+   ADMIN LOCATION MONITOR
+============================================================ */
+
+function renderLocationMonitor(){
+
+    const settings =
+        getSettings();
+
+    document.getElementById("monitorSchoolLat").textContent =
+        settings.latitude;
+
+    document.getElementById("monitorSchoolLon").textContent =
+        settings.longitude;
+
+    document.getElementById("monitorRadius").textContent =
+        settings.radius + " metres";
+
+    const today =
+        getNairobiDate();
+
+    const attendance =
+        getAttendance()
+        .filter(a => a.date === today);
+
+    const tbody =
+        document.getElementById("locationTable");
+
+    tbody.innerHTML = "";
+
+    attendance.forEach(record => {
+
+        const tr =
+            document.createElement("tr");
+
+        tr.innerHTML = `
+
+            <td>${record.teacherName}</td>
+
+            <td>${record.date}</td>
+
+            <td>${formatDateTime(record.clockIn)}</td>
+
+            <td>${record.teacherLatitude ?? "-"}</td>
+
+            <td>${record.teacherLongitude ?? "-"}</td>
+
+            <td>${record.accuracy ? Math.round(record.accuracy)+"m" : "-"}</td>
+
+            <td><strong>${record.distance ?? "-"}m</strong></td>
+
+            <td>${record.direction ?? "-"}</td>
+
+            <td>
+                <span class="status ${
+                    record.areaStatus === "WITHIN"
+                    ? "status-green"
+                    : "status-red"
+                }">
+                    ${record.areaStatus ?? "UNKNOWN"}
+                </span>
+            </td>
+
+        `;
+
+        tbody.appendChild(tr);
+
+    });
+
+}
+
+
+/* ============================================================
+   SETTINGS
+============================================================ */
+
+function loadLocationSettings(){
+
+    const settings =
+        getSettings();
+
+    document.getElementById("schoolLatitude").value =
+        settings.latitude;
+
+    document.getElementById("schoolLongitude").value =
+        settings.longitude;
+
+    document.getElementById("schoolRadius").value =
+        settings.radius;
+
+}
+
+
+function saveLocationSettings(){
+
+    if(currentUser.role !== "ADMIN"){
+        return;
+    }
+
+    const latitude =
+        parseFloat(
+            document.getElementById("schoolLatitude").value
+        );
+
+    const longitude =
+        parseFloat(
+            document.getElementById("schoolLongitude").value
+        );
+
+    const radius =
+        parseFloat(
+            document.getElementById("schoolRadius").value
+        );
+
+    if(
+        !Number.isFinite(latitude) ||
+        !Number.isFinite(longitude) ||
+        !Number.isFinite(radius) ||
+        radius <= 0
+    ){
+
+        alert("Please enter valid location values.");
+
+        return;
+    }
+
+    const settings = {
+
+        latitude:latitude,
+
+        longitude:longitude,
+
+        radius:radius
+
+    };
+
+    localStorage.setItem(
+        "scad_settings",
+        JSON.stringify(settings)
+    );
+
+    addAudit(
+        currentUser.username,
+        "LOCATION_SETTINGS",
+        `School location changed to ${latitude}, ${longitude}. Radius: ${radius}m.`
+    );
+
+    alert("School location saved successfully.");
+
+    refreshAll();
+
+}
+
+
+function testCurrentLocation(){
+
+    if(!navigator.geolocation){
+
+        alert("GPS is not supported.");
+
+        return;
+    }
+
+    const result =
+        document.getElementById("locationTestResult");
+
+    result.innerHTML = `
+        <div class="warning" style="margin-top:15px;">
+            Getting your current GPS location...
+        </div>
+    `;
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position){
+
+            const data =
+                processTeacherLocation(position);
+
+            result.innerHTML = `
+
+                <div class="${
+                    data.areaStatus === "WITHIN"
+                    ? "success-box"
+                    : "warning"
+                }" style="margin-top:15px;">
+
+                    <strong>Location Test Result</strong>
+
+                    <br><br>
+
+                    Your latitude:
+                    ${data.teacherLatitude}
+
+                    <br>
+
+                    Your longitude:
+                    ${data.teacherLongitude}
+
+                    <br>
+
+                    Accuracy:
+                    ${Math.round(data.accuracy)} metres
+
+                    <br>
+
+                    Distance from school:
+                    <strong>${data.distance} metres</strong>
+
+                    <br>
+
+                    Direction:
+                    <strong>${data.direction}</strong>
+
+                    <br>
+
+                    Area:
+                    <strong>${data.areaStatus}</strong>
+
+                </div>
+
+            `;
+
+        },
+
+        function(){
+
+            result.innerHTML = `
+                <div class="danger-box" style="margin-top:15px;">
+                    Unable to obtain your location.
+                </div>
+            `;
+
+        },
+
+        {
+            enableHighAccuracy:true,
+            timeout:20000,
+            maximumAge:0
+        }
+
+    );
+
+}
+
+
+/* ============================================================
    DASHBOARD
-========================================================= */
+============================================================ */
 
-function updateDashboard(){
+function renderDashboard(){
 
-    processAutomaticClockOuts();
-
-
-    const teachers =
-        users.filter(
-            u => u.role === "TEACHER"
-        );
-
-
-    const today =
-        getToday();
-
-
-    const records =
-        attendance.filter(
-            a => a.date === today
-        );
-
-
-    const outside =
-        records.filter(
-            a => a.areaStatus === "OUTSIDE"
-        );
-
-
-    const auto =
-        records.filter(
-            a =>
-            a.clockOutType ===
-            "AUTO_11_HOUR"
-        );
-
-
-    const still =
-        records.filter(
-            a => !a.clockOut
-        );
-
-
-    setText(
-        "totalStaff",
-        teachers.length
-    );
-
-    setText(
-        "presentStaff",
-        records.length
-    );
-
-    setText(
-        "stillIn",
-        still.length
-    );
-
-    setText(
-        "clockedOut",
-        records.filter(
-            a => a.clockOut
-        ).length
-    );
-
-    setText(
-        "outsideCount",
-        outside.length
-    );
-
-    setText(
-        "autoCount",
-        auto.length
-    );
-
-
-    if(outside.length > 0){
-
-        document.getElementById(
-            "outsideAlert"
-        ).innerHTML =
-
-        `
-        <div class="alert alert-danger">
-            <strong>Location Alert:</strong>
-            ${outside.length}
-            attendance record(s) were made outside the configured school area.
-        </div>
-        `;
-
-    }
-
-    else{
-
-        document.getElementById(
-            "outsideAlert"
-        ).innerHTML =
-
-        `
-        <div class="alert alert-success">
-            No outside-area attendance records detected today.
-        </div>
-        `;
-
-    }
-
-
-    document.getElementById(
-        "aiSummary"
-    ).innerHTML =
-
-    generateAISummary();
-
-
-    updatePrincipal();
-
-}
-
-
-/* =========================================================
-   PRINCIPAL
-========================================================= */
-
-function updatePrincipal(){
+    const users =
+        getUsers();
 
     const teachers =
         users.filter(
             u => u.role === "TEACHER"
         );
 
-
     const today =
-        getToday();
+        getNairobiDate();
 
+    const attendance =
+        getAttendance()
+        .filter(a => a.date === today);
 
-    const records =
-        attendance.filter(
-            a => a.date === today
-        );
-
-
-    setText(
-        "principalTotal",
-        teachers.length
-    );
-
-    setText(
-        "principalPresent",
-        records.length
-    );
-
-    setText(
-        "principalOutside",
-        records.filter(
-            a =>
-            a.areaStatus === "OUTSIDE"
-        ).length
-    );
-
-    setText(
-        "principalAuto",
-        records.filter(
-            a =>
-            a.clockOutType ===
-            "AUTO_11_HOUR"
-        ).length
-    );
-
-
-    document.getElementById(
-        "principalSummary"
-    ).innerHTML =
-    generateAISummary();
-
-}
-
-
-/* =========================================================
-   AI SUMMARY
-========================================================= */
-
-function generateAISummary(){
-
-    const today =
-        getToday();
-
-
-    const records =
-        attendance.filter(
-            a => a.date === today
-        );
-
+    const present =
+        attendance.length;
 
     const outside =
-        records.filter(
+        attendance.filter(
             a => a.areaStatus === "OUTSIDE"
         ).length;
 
+    const clockedOut =
+        attendance.filter(
+            a => a.clockOut
+        ).length;
+
+    const stillIn =
+        attendance.filter(
+            a => !a.clockOut
+        ).length;
 
     const automatic =
-        records.filter(
-            a =>
-            a.clockOutType ===
-            "AUTO_11_HOUR"
+        attendance.filter(
+            a => a.clockOutType === "AUTO_11_HOUR"
         ).length;
 
+    document.getElementById("dashTotalStaff").textContent =
+        teachers.length;
 
-    if(records.length === 0){
+    document.getElementById("dashPresent").textContent =
+        present;
 
-        return `
-        <div class="alert alert-info">
-            No attendance records have been recorded today.
-        </div>
-        `;
+    document.getElementById("dashAbsent").textContent =
+        Math.max(teachers.length-present,0);
 
-    }
+    document.getElementById("dashOutside").textContent =
+        outside;
 
+    document.getElementById("dashClockedOut").textContent =
+        clockedOut;
 
-    let verdict =
-        "NORMAL";
+    document.getElementById("dashStillIn").textContent =
+        stillIn;
 
-    let message =
-        "Attendance activity is currently within normal monitoring conditions.";
+    document.getElementById("dashAuto").textContent =
+        automatic;
 
+    const warning =
+        document.getElementById("dashboardWarning");
 
     if(outside > 0){
 
-        verdict =
-        "REQUIRES REVIEW";
+        warning.innerHTML = `
 
-        message =
-        outside +
-        " teacher(s) recorded attendance outside the configured school area.";
+            <div class="warning" style="margin-bottom:20px;">
 
-    }
+                <strong>LOCATION WARNING:</strong>
 
+                ${outside}
+                attendance record(s) were made outside
+                the configured school radius.
 
-    if(automatic > 0){
+                These records were accepted but require administrative attention.
 
-        message +=
-        " " +
-        automatic +
-        " automatic clock-out(s) were recorded.";
+            </div>
 
-    }
+        `;
 
+    }else{
 
-    return `
-        <div class="badge ${
-            verdict === "NORMAL"
-            ? "badge-green"
-            : "badge-red"
-        }">
-            AI VERDICT: ${verdict}
-        </div>
+        warning.innerHTML = `
 
-        <br><br>
+            <div class="success-box" style="margin-bottom:20px;">
 
-        <p>${message}</p>
-    `;
+                <strong>Location Status:</strong>
 
-}
+                No outside-area attendance records detected today.
 
+            </div>
 
-/* =========================================================
-   ASK AI
-========================================================= */
-
-function askAI(){
-
-    const question =
-        document.getElementById(
-            "aiQuestion"
-        ).value
-        .toLowerCase();
-
-
-    const today =
-        getToday();
-
-
-    const records =
-        attendance.filter(
-            a => a.date === today
-        );
-
-
-    let answer =
-        "";
-
-
-    if(
-        question.includes("outside")
-    ){
-
-        const outside =
-            records.filter(
-                a =>
-                a.areaStatus ===
-                "OUTSIDE"
-            );
-
-
-        if(outside.length === 0){
-
-            answer =
-            "No teacher has been recorded outside the configured school area today.";
-
-        }
-
-        else{
-
-            answer =
-            outside
-            .map(
-                a =>
-                `${a.teacher} — ${formatDistance(a.distance)} ${a.direction}`
-            )
-            .join("<br>");
-
-        }
-
-    }
-
-    else if(
-        question.includes("automatic") ||
-        question.includes("auto")
-    ){
-
-        const auto =
-            records.filter(
-                a =>
-                a.clockOutType ===
-                "AUTO_11_HOUR"
-            );
-
-
-        answer =
-        auto.length === 0
-        ? "There are no automatic clock-outs today."
-        : auto.map(
-            a => a.teacher
-        ).join("<br>");
-
-    }
-
-    else{
-
-        answer =
-        `
-        Today's attendance records: ${records.length}.<br>
-        Outside-area records: ${
-            records.filter(
-                a =>
-                a.areaStatus ===
-                "OUTSIDE"
-            ).length
-        }.<br>
-        Automatic clock-outs: ${
-            records.filter(
-                a =>
-                a.clockOutType ===
-                "AUTO_11_HOUR"
-            ).length
-        }.
         `;
 
     }
 
 
-    document.getElementById(
-        "aiAnswer"
-    ).innerHTML =
+    const tbody =
+        document.getElementById("dashboardAttendanceTable");
 
-    `
-    <div class="alert alert-info">
-        ${answer}
-    </div>
-    `;
+    tbody.innerHTML = "";
+
+    attendance.forEach(record => {
+
+        const tr =
+            document.createElement("tr");
+
+        tr.innerHTML = `
+
+            <td>${record.teacherName}</td>
+
+            <td>${record.staffNo}</td>
+
+            <td>${formatDateTime(record.clockIn)}</td>
+
+            <td>${formatDateTime(record.clockOut)}</td>
+
+            <td>
+                <span class="status ${
+                    record.clockOut
+                    ? "status-blue"
+                    : "status-green"
+                }">
+                    ${record.clockOut ? "CLOCKED OUT" : "CLOCKED IN"}
+                </span>
+            </td>
+
+            <td>
+                <span class="status ${
+                    record.areaStatus === "WITHIN"
+                    ? "status-green"
+                    : "status-red"
+                }">
+                    ${record.areaStatus}
+                </span>
+            </td>
+
+        `;
+
+        tbody.appendChild(tr);
+
+    });
 
 }
 
 
-/* =========================================================
-   TEACHER TABLE
-========================================================= */
+/* ============================================================
+   TEACHER HISTORY
+============================================================ */
 
 function renderTeacherAttendance(){
 
-    if(!currentUser)
+    if(currentUser.role !== "TEACHER"){
         return;
+    }
 
+    processAutomaticClockOuts();
 
-    const records =
-        attendance.filter(
+    const today =
+        getNairobiDate();
+
+    const attendance =
+        getAttendance();
+
+    const todayRecord =
+        attendance.find(
             a =>
-            a.userId ===
-            currentUser.id
+            a.teacherId === currentUser.id &&
+            a.date === today &&
+            a.clockIn
         );
 
+    const clockInButton =
+        document.getElementById("clockInButton");
 
-    const tbody =
-        document.getElementById(
-            "teacherAttendanceTable"
-        );
+    const clockOutButton =
+        document.getElementById("clockOutButton");
 
+    if(todayRecord){
 
-    if(!tbody)
-        return;
+        clockInButton.disabled = true;
 
+        clockInButton.textContent =
+            "CLOCKED IN";
 
-    tbody.innerHTML = "";
+        clockOutButton.disabled =
+            !!todayRecord.clockOut;
 
+    }else{
 
-    records
-    .slice()
-    .reverse()
-    .forEach(record=>{
+        clockInButton.disabled = false;
 
-        tbody.innerHTML +=
+        clockInButton.textContent =
+            "CLOCK IN";
 
-        `
-        <tr>
+        clockOutButton.disabled = true;
 
-            <td>${record.date}</td>
+    }
 
-            <td>
-                ${formatTime(record.clockIn)}
-            </td>
+    const status =
+        document.getElementById("teacherAttendanceStatus");
 
-            <td>
-                ${formatTime(record.clockOut)}
-            </td>
+    if(todayRecord){
 
-            <td>
+        status.innerHTML = `
+
+            <div class="${
+                todayRecord.clockOut
+                ? "success-box"
+                : "success-box"
+            }">
+
+                Clock-in:
+                <strong>${formatDateTime(todayRecord.clockIn)}</strong>
+
+                <br>
+
                 ${
-                    record.clockOutType ||
-                    "—"
+                    todayRecord.clockOut
+                    ?
+                    `
+                    Clock-out:
+                    <strong>${formatDateTime(todayRecord.clockOut)}</strong>
+                    <br>
+                    Type:
+                    <strong>${todayRecord.clockOutType}</strong>
+                    `
+                    :
+                    `
+                    Status:
+                    <strong>STILL CLOCKED IN</strong>
+                    `
                 }
-            </td>
 
-            <td>
-                <span class="badge badge-green">
-                    ${record.status}
-                </span>
-            </td>
+            </div>
 
-        </tr>
         `;
 
-    });
+    }else{
 
-}
+        status.innerHTML = `
+
+            <div class="warning">
+
+                You have not clocked in today.
+
+            </div>
+
+        `;
+
+    }
 
 
-/* =========================================================
-   LOCATION TABLE
-========================================================= */
-
-function renderLocationTable(){
-
-    const tbody =
-        document.getElementById(
-            "locationTable"
+    const history =
+        attendance
+        .filter(
+            a =>
+            a.teacherId === currentUser.id
+        )
+        .sort(
+            (a,b) =>
+            new Date(b.clockIn)-new Date(a.clockIn)
         );
 
-
-    if(!tbody)
-        return;
-
+    const tbody =
+        document.getElementById("teacherHistoryTable");
 
     tbody.innerHTML = "";
 
+    history.forEach(record => {
 
-    attendance
-    .slice()
-    .reverse()
-    .forEach(record=>{
+        const tr =
+            document.createElement("tr");
 
-        tbody.innerHTML +=
-
-        `
-        <tr>
-
-            <td>${record.teacher}</td>
+        tr.innerHTML = `
 
             <td>${record.date}</td>
 
-            <td>${formatTime(record.clockIn)}</td>
+            <td>${formatDateTime(record.clockIn)}</td>
+
+            <td>${formatDateTime(record.clockOut)}</td>
+
+            <td>${record.clockOutType || "-"}</td>
 
             <td>
-                ${record.latitude?.toFixed(6)}
-                ,
-                ${record.longitude?.toFixed(6)}
-            </td>
-
-            <td>
-                ${formatDistance(record.distance)}
-            </td>
-
-            <td>
-                ${record.direction}
-            </td>
-
-            <td>
-                ${record.accuracy
-                ? Math.round(record.accuracy)+" m"
-                : "—"}
-            </td>
-
-            <td>
-
-                <span class="badge ${
+                <span class="status ${
                     record.areaStatus === "WITHIN"
-                    ? "badge-green"
-                    : record.areaStatus === "OUTSIDE"
-                    ? "badge-red"
-                    : "badge-yellow"
+                    ? "status-green"
+                    : "status-red"
                 }">
-
                     ${record.areaStatus}
-
-                </span>
-
-            </td>
-
-        </tr>
-        `;
-
-    });
-
-}
-
-
-/* =========================================================
-   REPORTS
-========================================================= */
-
-function renderReports(){
-
-    const tbody =
-        document.getElementById(
-            "reportsTableBody"
-        );
-
-
-    if(!tbody)
-        return;
-
-
-    tbody.innerHTML = "";
-
-
-    attendance
-    .slice()
-    .reverse()
-    .forEach(record=>{
-
-        tbody.innerHTML +=
-
-        `
-        <tr>
-
-            <td>${record.teacher}</td>
-
-            <td>${record.staff}</td>
-
-            <td>${record.date}</td>
-
-            <td>${formatTime(record.clockIn)}</td>
-
-            <td>${formatTime(record.clockOut)}</td>
-
-            <td>${record.clockOutType || "—"}</td>
-
-            <td>${record.status}</td>
-
-            <td>
-                ${record.latitude?.toFixed(6)},
-                ${record.longitude?.toFixed(6)}
-            </td>
-
-            <td>${formatDistance(record.distance)}</td>
-
-            <td>${record.direction}</td>
-
-            <td>
-                ${record.accuracy
-                ? Math.round(record.accuracy)+" m"
-                : "—"}
-            </td>
-
-            <td>${record.areaStatus}</td>
-
-        </tr>
-        `;
-
-    });
-
-}
-
-
-/* =========================================================
-   TEACHERS TABLE
-========================================================= */
-
-function renderTeachers(){
-
-    const tbody =
-        document.getElementById(
-            "teachersTable"
-        );
-
-
-    if(!tbody)
-        return;
-
-
-    tbody.innerHTML = "";
-
-
-    users
-    .filter(
-        u => u.role === "TEACHER"
-    )
-    .forEach(user=>{
-
-        tbody.innerHTML +=
-
-        `
-        <tr>
-
-            <td>${user.name}</td>
-
-            <td>${user.staff}</td>
-
-            <td>${user.username}</td>
-
-            <td>${user.department || "—"}</td>
-
-            <td>
-                ${
-                    user.classTeacher
-                    ? "YES"
-                    : "NO"
-                }
-            </td>
-
-            <td>
-                <span class="badge badge-green">
-                    ${user.status}
                 </span>
             </td>
 
-        </tr>
         `;
+
+        tbody.appendChild(tr);
 
     });
 
 }
 
 
-/* =========================================================
-   ADMINS TABLE
-========================================================= */
+/* ============================================================
+   TEACHER PROFILE
+============================================================ */
 
-function renderAdmins(){
+function renderTeacherProfile(){
 
-    const tbody =
-        document.getElementById(
-            "adminsTable"
+    if(currentUser.role !== "TEACHER"){
+        return;
+    }
+
+    document.getElementById("profileName").value =
+        currentUser.fullName;
+
+    document.getElementById("profileStaffNo").value =
+        currentUser.staffNo;
+
+    document.getElementById("profileUsername").value =
+        currentUser.username;
+
+    document.getElementById("profileDepartment").value =
+        currentUser.department || "";
+
+    document.getElementById("profileSubjects").value =
+        currentUser.subjects || "";
+
+    document.getElementById("profileClassTeacher").value =
+        currentUser.classTeacher || "NO";
+
+}
+
+
+function saveTeacherProfile(){
+
+    const users =
+        getUsers();
+
+    const user =
+        users.find(
+            u => u.id === currentUser.id
         );
 
+    if(!user) return;
 
-    if(!tbody)
-        return;
+    user.department =
+        document.getElementById("profileDepartment").value;
 
+    user.subjects =
+        document.getElementById("profileSubjects").value;
 
-    tbody.innerHTML = "";
+    user.classTeacher =
+        document.getElementById("profileClassTeacher").value;
 
+    saveUsers(users);
 
-    users
-    .filter(
-        u =>
-        u.role === "ADMIN"
-    )
-    .forEach(user=>{
+    currentUser = user;
 
-        tbody.innerHTML +=
+    localStorage.setItem(
+        "scad_current_user",
+        JSON.stringify(user)
+    );
 
-        `
-        <tr>
+    addAudit(
+        currentUser.username,
+        "PROFILE_UPDATE",
+        "Teacher profile updated."
+    );
 
-            <td>${user.name}</td>
-
-            <td>${user.username}</td>
-
-            <td>${user.role}</td>
-
-        </tr>
-        `;
-
-    });
+    alert("Profile saved.");
 
 }
 
 
-/* =========================================================
-   AUDIT TABLE
-========================================================= */
-
-function renderAudit(){
-
-    const tbody =
-        document.getElementById(
-            "auditTable"
-        );
-
-
-    if(!tbody)
-        return;
-
-
-    tbody.innerHTML = "";
-
-
-    auditLogs
-    .slice()
-    .reverse()
-    .forEach(log=>{
-
-        tbody.innerHTML +=
-
-        `
-        <tr>
-
-            <td>
-                ${new Date(
-                    log.date
-                ).toLocaleString()}
-            </td>
-
-            <td>
-                ${log.admin}
-            </td>
-
-            <td>
-                ${log.action}
-            </td>
-
-            <td>
-                ${log.details}
-            </td>
-
-        </tr>
-        `;
-
-    });
-
-}
-
-
-/* =========================================================
-   CORRECTIONS
-========================================================= */
-
-function renderCorrections(){
-
-    const tbody =
-        document.getElementById(
-            "correctionsTable"
-        );
-
-
-    if(!tbody)
-        return;
-
-
-    tbody.innerHTML = "";
-
-
-    corrections.forEach(c=>{
-
-        tbody.innerHTML +=
-
-        `
-        <tr>
-
-            <td>${c.teacher}</td>
-
-            <td>${c.date}</td>
-
-            <td>${c.original}</td>
-
-            <td>${c.corrected}</td>
-
-            <td>${c.reason}</td>
-
-        </tr>
-        `;
-
-    });
-
-}
-
-
-/* =========================================================
-   ADD TEACHER
-========================================================= */
+/* ============================================================
+   TEACHER MANAGEMENT
+============================================================ */
 
 function addTeacher(){
 
-    if(currentUser.role !== "ADMIN")
-        return;
-
-
     const name =
-        document.getElementById(
-            "newTeacherName"
-        ).value.trim();
+        document.getElementById("newTeacherName").value.trim();
 
-
-    const staff =
-        document.getElementById(
-            "newTeacherStaff"
-        ).value.trim();
-
+    const staffNo =
+        document.getElementById("newTeacherStaffNo").value.trim();
 
     const username =
-        document.getElementById(
-            "newTeacherUsername"
-        ).value.trim();
-
+        document.getElementById("newTeacherUsername").value.trim();
 
     const password =
-        document.getElementById(
-            "newTeacherPassword"
-        ).value;
-
+        document.getElementById("newTeacherPassword").value;
 
     const department =
-        document.getElementById(
-            "newTeacherDepartment"
-        ).value.trim();
+        document.getElementById("newTeacherDepartment").value.trim();
 
+    if(!name || !staffNo || !username || !password){
 
-    const classTeacher =
-        document.getElementById(
-            "newTeacherClass"
-        ).value === "true";
-
-
-    if(
-        !name ||
-        !staff ||
-        !username ||
-        !password
-    ){
-
-        alert(
-            "Please fill in all required teacher information."
-        );
+        alert("Please complete all required fields.");
 
         return;
-
     }
 
+    const users =
+        getUsers();
 
     if(
         users.some(
-            u =>
-            u.username === username
+            u => u.username === username
         )
     ){
 
-        alert(
-            "Username already exists."
-        );
+        alert("That username already exists.");
 
         return;
-
     }
-
 
     users.push({
 
         id:
-        "teacher-" +
-        Date.now(),
+            "T" + Date.now(),
 
-        name:name,
+        role:
+            "TEACHER",
 
-        staff:staff,
+        fullName:
+            name,
 
-        username:username,
+        staffNo:
+            staffNo,
 
-        password:password,
+        username:
+            username,
 
-        role:"TEACHER",
+        password:
+            password,
 
-        department:department,
+        department:
+            department,
 
-        classTeacher:classTeacher,
+        subjects:
+            "",
 
-        status:"ACTIVE"
+        classTeacher:
+            "NO",
+
+        status:
+            "ACTIVE"
 
     });
 
-
-    saveDatabase();
-
+    saveUsers(users);
 
     addAudit(
-        "Add teacher",
-        "Added teacher " +
-        name
+        currentUser.username,
+        "ADD_TEACHER",
+        `Added teacher ${name}.`
     );
 
+    document.getElementById("newTeacherName").value = "";
 
-    alert(
-        "Teacher added successfully."
+    document.getElementById("newTeacherStaffNo").value = "";
+
+    document.getElementById("newTeacherUsername").value = "";
+
+    document.getElementById("newTeacherPassword").value = "";
+
+    document.getElementById("newTeacherDepartment").value = "";
+
+    renderTeachers();
+
+    alert("Teacher added successfully.");
+
+}
+
+
+function toggleTeacherStatus(id){
+
+    const users =
+        getUsers();
+
+    const user =
+        users.find(u => u.id === id);
+
+    if(!user) return;
+
+    user.status =
+        user.status === "ACTIVE"
+        ? "SUSPENDED"
+        : "ACTIVE";
+
+    saveUsers(users);
+
+    addAudit(
+        currentUser.username,
+        "TEACHER_STATUS",
+        `${user.fullName} changed to ${user.status}.`
     );
-
 
     renderTeachers();
 
 }
 
 
-/* =========================================================
-   ADD ADMIN
-========================================================= */
+function renderTeachers(){
+
+    const users =
+        getUsers();
+
+    const teachers =
+        users.filter(
+            u => u.role === "TEACHER"
+        );
+
+    const tbody =
+        document.getElementById("teachersTable");
+
+    tbody.innerHTML = "";
+
+    teachers.forEach(user => {
+
+        const tr =
+            document.createElement("tr");
+
+        tr.innerHTML = `
+
+            <td>${user.fullName}</td>
+
+            <td>${user.staffNo}</td>
+
+            <td>${user.username}</td>
+
+            <td>${user.department || "-"}</td>
+
+            <td>${user.classTeacher || "NO"}</td>
+
+            <td>
+                <span class="status ${
+                    user.status === "ACTIVE"
+                    ? "status-green"
+                    : "status-red"
+                }">
+                    ${user.status}
+                </span>
+            </td>
+
+            <td>
+
+                <button
+                    class="btn ${
+                        user.status === "ACTIVE"
+                        ? "btn-danger"
+                        : "btn-success"
+                    }"
+                    onclick="toggleTeacherStatus('${user.id}')">
+
+                    ${
+                        user.status === "ACTIVE"
+                        ? "SUSPEND"
+                        : "ACTIVATE"
+                    }
+
+                </button>
+
+            </td>
+
+        `;
+
+        tbody.appendChild(tr);
+
+    });
+
+}
+
+
+/* ============================================================
+   ADMIN MANAGEMENT
+============================================================ */
 
 function addAdmin(){
 
-    if(currentUser.role !== "ADMIN")
-        return;
-
-
     const name =
-        document.getElementById(
-            "newAdminName"
-        ).value.trim();
-
+        document.getElementById("newAdminName").value.trim();
 
     const username =
-        document.getElementById(
-            "newAdminUsername"
-        ).value.trim();
-
+        document.getElementById("newAdminUsername").value.trim();
 
     const password =
-        document.getElementById(
-            "newAdminPassword"
-        ).value;
+        document.getElementById("newAdminPassword").value;
 
+    if(!name || !username || !password){
 
-    if(
-        !name ||
-        !username ||
-        !password
-    ){
-
-        alert(
-            "Please complete all fields."
-        );
+        alert("Complete all fields.");
 
         return;
-
     }
 
+    const users =
+        getUsers();
 
     if(
         users.some(
-            u =>
-            u.username === username
+            u => u.username === username
         )
     ){
 
-        alert(
-            "Username already exists."
-        );
+        alert("Username already exists.");
 
         return;
-
     }
-
 
     users.push({
 
         id:
-        "admin-" +
-        Date.now(),
+            "A" + Date.now(),
 
-        name:name,
+        role:
+            "ADMIN",
 
-        staff:
-        "ADM-" +
-        Date.now(),
+        fullName:
+            name,
 
-        username:username,
+        staffNo:
+            "ADM-" + Date.now(),
 
-        password:password,
+        username:
+            username,
 
-        role:"ADMIN",
+        password:
+            password,
 
-        department:"Administration",
-
-        classTeacher:false,
-
-        status:"ACTIVE"
+        status:
+            "ACTIVE"
 
     });
 
-
-    saveDatabase();
-
+    saveUsers(users);
 
     addAudit(
-        "Add administrator",
-        "Added administrator " +
-        name
+        currentUser.username,
+        "ADD_ADMIN",
+        `Added administrator ${name}.`
     );
 
+    document.getElementById("newAdminName").value = "";
 
-    alert(
-        "Administrator added."
+    document.getElementById("newAdminUsername").value = "";
+
+    document.getElementById("newAdminPassword").value = "";
+
+    renderAdmins();
+
+    alert("Administrator added successfully.");
+
+}
+
+
+function toggleAdminStatus(id){
+
+    if(id === currentUser.id){
+
+        alert("You cannot suspend your own account.");
+
+        return;
+    }
+
+    const users =
+        getUsers();
+
+    const user =
+        users.find(u => u.id === id);
+
+    if(!user) return;
+
+    user.status =
+        user.status === "ACTIVE"
+        ? "SUSPENDED"
+        : "ACTIVE";
+
+    saveUsers(users);
+
+    addAudit(
+        currentUser.username,
+        "ADMIN_STATUS",
+        `${user.fullName} changed to ${user.status}.`
     );
-
 
     renderAdmins();
 
 }
 
 
-/* =========================================================
-   SETTINGS
-========================================================= */
+function renderAdmins(){
 
-function loadSettings(){
+    const users =
+        getUsers();
 
-    const lat =
-        document.getElementById(
-            "schoolLatitude"
+    const admins =
+        users.filter(
+            u => u.role === "ADMIN"
         );
 
-    const lon =
-        document.getElementById(
-            "schoolLongitude"
-        );
+    const tbody =
+        document.getElementById("adminsTable");
 
-    const radius =
-        document.getElementById(
-            "schoolRadius"
-        );
+    tbody.innerHTML = "";
 
+    admins.forEach(user => {
 
-    if(lat)
-        lat.value =
-        settings.latitude ?? "";
+        const tr =
+            document.createElement("tr");
 
+        tr.innerHTML = `
 
-    if(lon)
-        lon.value =
-        settings.longitude ?? "";
+            <td>${user.fullName}</td>
 
+            <td>${user.username}</td>
 
-    if(radius)
-        radius.value =
-        settings.radius;
+            <td>ADMIN</td>
 
-}
+            <td>
 
+                <span class="status ${
+                    user.status === "ACTIVE"
+                    ? "status-green"
+                    : "status-red"
+                }">
 
-function saveSettings(){
+                    ${user.status}
 
-    if(currentUser.role !== "ADMIN")
-        return;
+                </span>
 
+            </td>
 
-    const lat =
-        parseFloat(
-            document.getElementById(
-                "schoolLatitude"
-            ).value
-        );
+            <td>
 
+                <button
+                    class="btn ${
+                        user.status === "ACTIVE"
+                        ? "btn-danger"
+                        : "btn-success"
+                    }"
+                    onclick="toggleAdminStatus('${user.id}')">
 
-    const lon =
-        parseFloat(
-            document.getElementById(
-                "schoolLongitude"
-            ).value
-        );
+                    ${
+                        user.status === "ACTIVE"
+                        ? "SUSPEND"
+                        : "ACTIVATE"
+                    }
 
+                </button>
 
-    const radius =
-        parseFloat(
-            document.getElementById(
-                "schoolRadius"
-            ).value
-        );
+            </td>
 
+        `;
 
-    if(
-        Number.isNaN(lat) ||
-        Number.isNaN(lon) ||
-        Number.isNaN(radius)
-    ){
-
-        alert(
-            "Please enter valid location settings."
-        );
-
-        return;
-
-    }
-
-
-    if(
-        lat < -90 ||
-        lat > 90 ||
-        lon < -180 ||
-        lon > 180
-    ){
-
-        alert(
-            "Invalid GPS coordinates."
-        );
-
-        return;
-
-    }
-
-
-    settings.latitude = lat;
-    settings.longitude = lon;
-    settings.radius = radius;
-
-
-    saveDatabase();
-
-
-    addAudit(
-        "Update settings",
-        "School location settings updated."
-    );
-
-
-    alert(
-        "Settings saved successfully."
-    );
-
-}
-
-
-/* =========================================================
-   AUDIT
-========================================================= */
-
-function addAudit(
-    action,
-    details
-){
-
-    auditLogs.push({
-
-        date:
-        new Date().toISOString(),
-
-        admin:
-        currentUser
-        ? currentUser.name
-        : "SYSTEM",
-
-        action:action,
-
-        details:details
+        tbody.appendChild(tr);
 
     });
 
-
-    saveDatabase();
-
 }
 
 
-/* =========================================================
-   DISTANCE FORMAT
-========================================================= */
+/* ============================================================
+   REPORTS
+============================================================ */
 
-function formatDistance(distance){
+function populateReportTeachers(){
 
-    if(
-        distance === null ||
-        distance === undefined
-    )
-        return "Not configured";
+    const select =
+        document.getElementById("reportTeacher");
 
+    if(!select) return;
 
-    if(distance < 1000)
-        return Math.round(distance) + " m";
-
-
-    return (
-        distance / 1000
-    ).toFixed(2) + " km";
-
-}
-
-
-/* =========================================================
-   CSV DOWNLOAD
-========================================================= */
-
-function downloadCSV(){
-
-    if(
-        !attendance.length
-    ){
-
-        alert(
-            "There is no attendance data to export."
+    const teachers =
+        getUsers()
+        .filter(
+            u => u.role === "TEACHER"
         );
 
-        return;
+    select.innerHTML =
+        `<option value="ALL">All Teachers</option>`;
+
+    teachers.forEach(teacher => {
+
+        select.innerHTML += `
+
+            <option value="${teacher.id}">
+                ${teacher.fullName}
+            </option>
+
+        `;
+
+    });
+
+}
+
+
+function generateReport(){
+
+    let data =
+        getAttendance();
+
+    const start =
+        document.getElementById("reportStart").value;
+
+    const end =
+        document.getElementById("reportEnd").value;
+
+    const teacher =
+        document.getElementById("reportTeacher").value;
+
+    if(start){
+
+        data =
+            data.filter(
+                a => a.date >= start
+            );
 
     }
 
+    if(end){
+
+        data =
+            data.filter(
+                a => a.date <= end
+            );
+
+    }
+
+    if(teacher !== "ALL"){
+
+        data =
+            data.filter(
+                a => a.teacherId === teacher
+            );
+
+    }
+
+    const tbody =
+        document.getElementById("reportTable");
+
+    tbody.innerHTML = "";
+
+    data
+    .sort(
+        (a,b) =>
+        new Date(b.clockIn)-new Date(a.clockIn)
+    )
+    .forEach(record => {
+
+        const tr =
+            document.createElement("tr");
+
+        tr.innerHTML = `
+
+            <td>${record.date}</td>
+
+            <td>${record.teacherName}</td>
+
+            <td>${record.staffNo}</td>
+
+            <td>${formatDateTime(record.clockIn)}</td>
+
+            <td>${formatDateTime(record.clockOut)}</td>
+
+            <td>${record.clockOutType || "-"}</td>
+
+            <td>${record.areaStatus || "-"}</td>
+
+            <td>${record.distance ?? "-"}m</td>
+
+            <td>${record.direction || "-"}</td>
+
+        `;
+
+        tbody.appendChild(tr);
+
+    });
+
+}
+
+
+/* ============================================================
+   CSV EXPORT
+============================================================ */
+
+function exportCSV(){
+
+    const data =
+        getAttendance();
+
+    if(!data.length){
+
+        alert("There is no attendance data to export.");
+
+        return;
+    }
 
     const headers = [
 
+        "Date",
         "Teacher",
         "Staff Number",
-        "Date",
         "Clock In",
         "Clock Out",
         "Clock Out Type",
-        "Status",
-        "Latitude",
-        "Longitude",
+        "Teacher Latitude",
+        "Teacher Longitude",
+        "GPS Accuracy",
         "School Latitude",
         "School Longitude",
-        "Distance",
+        "Distance Metres",
         "Direction",
-        "Accuracy",
         "Area Status"
 
     ];
 
-
     const rows =
-        attendance.map(
-            a => [
+        data.map(a => [
 
-                a.teacher,
-                a.staff,
-                a.date,
-                a.clockIn,
-                a.clockOut || "",
-                a.clockOutType || "",
-                a.status,
-                a.latitude || "",
-                a.longitude || "",
-                a.schoolLatitude || "",
-                a.schoolLongitude || "",
-                a.distance || "",
-                a.direction || "",
-                a.accuracy || "",
-                a.areaStatus || ""
+            a.date,
 
-            ]
-        );
+            a.teacherName,
 
+            a.staffNo,
+
+            a.clockIn,
+
+            a.clockOut || "",
+
+            a.clockOutType || "",
+
+            a.teacherLatitude ?? "",
+
+            a.teacherLongitude ?? "",
+
+            a.accuracy ?? "",
+
+            a.schoolLatitude ?? "",
+
+            a.schoolLongitude ?? "",
+
+            a.distance ?? "",
+
+            a.direction || "",
+
+            a.areaStatus || ""
+
+        ]);
 
     const csv =
         [
@@ -3981,14 +3737,14 @@ function downloadCSV(){
         ]
         .map(
             row =>
-            row.map(
+            row
+            .map(
                 value =>
-                `"${String(value)
-                .replace(/"/g,'""')}"`
-            ).join(",")
+                `"${String(value).replace(/"/g,'""')}"`
+            )
+            .join(",")
         )
         .join("\n");
-
 
     const blob =
         new Blob(
@@ -3998,96 +3754,696 @@ function downloadCSV(){
             }
         );
 
-
     const url =
         URL.createObjectURL(blob);
-
 
     const link =
         document.createElement("a");
 
-
     link.href = url;
 
     link.download =
-        "SAG-Attendance-Report.csv";
+        "SCAD_Attendance_Report.csv";
 
     link.click();
-
 
     URL.revokeObjectURL(url);
 
 }
 
 
-/* =========================================================
-   REFRESH TABLES
-========================================================= */
+/* ============================================================
+   CORRECTIONS
+============================================================ */
 
-function refreshTables(){
+function populateCorrectionRecords(){
 
-    processAutomaticClockOuts();
+    const select =
+        document.getElementById("correctionAttendance");
 
-    renderTeacherAttendance();
+    if(!select) return;
 
-    renderLocationTable();
+    const attendance =
+        getAttendance();
 
-    renderReports();
+    select.innerHTML =
+        "";
 
-    renderTeachers();
+    attendance.forEach(record => {
 
-    renderAdmins();
+        select.innerHTML += `
 
-    renderAudit();
+            <option value="${record.id}">
+
+                ${record.date} -
+                ${record.teacherName} -
+                ${record.staffNo}
+
+            </option>
+
+        `;
+
+    });
+
+}
+
+
+function correctAttendance(){
+
+    const id =
+        document.getElementById("correctionAttendance").value;
+
+    const newClockIn =
+        document.getElementById("correctClockIn").value;
+
+    const newClockOut =
+        document.getElementById("correctClockOut").value;
+
+    const reason =
+        document.getElementById("correctionReason").value.trim();
+
+    if(!id || !reason){
+
+        alert("Select a record and provide a reason.");
+
+        return;
+    }
+
+    const attendance =
+        getAttendance();
+
+    const record =
+        attendance.find(
+            a => a.id === id
+        );
+
+    if(!record){
+
+        alert("Attendance record not found.");
+
+        return;
+    }
+
+    const original = {
+
+        clockIn:
+            record.clockIn,
+
+        clockOut:
+            record.clockOut,
+
+        clockOutType:
+            record.clockOutType
+
+    };
+
+    if(newClockIn){
+
+        record.clockIn =
+            new Date(newClockIn).toISOString();
+
+    }
+
+    if(newClockOut){
+
+        record.clockOut =
+            new Date(newClockOut).toISOString();
+
+        record.clockOutType =
+            "MANUAL";
+
+    }
+
+    record.correction = {
+
+        correctedBy:
+            currentUser.fullName,
+
+        correctedAt:
+            new Date().toISOString(),
+
+        reason:
+            reason,
+
+        original:
+            original
+
+    };
+
+    saveAttendance(attendance);
+
+    const corrections =
+        getCorrections();
+
+    corrections.push({
+
+        id:
+            "COR-" + Date.now(),
+
+        attendanceId:
+            record.id,
+
+        teacherName:
+            record.teacherName,
+
+        date:
+            record.date,
+
+        original:
+            original,
+
+        corrected:{
+
+            clockIn:
+                record.clockIn,
+
+            clockOut:
+                record.clockOut
+
+        },
+
+        admin:
+            currentUser.fullName,
+
+        timestamp:
+            new Date().toISOString(),
+
+        reason:
+            reason
+
+    });
+
+    saveCorrections(corrections);
+
+    addAudit(
+        currentUser.username,
+        "ATTENDANCE_CORRECTION",
+        `Corrected ${record.teacherName}. Reason: ${reason}`
+    );
+
+    document.getElementById("correctionReason").value = "";
 
     renderCorrections();
 
-    loadSettings();
-
-    updateTeacherButtons();
-
-    updateDashboard();
+    alert("Correction saved with audit trail.");
 
 }
 
 
-/* =========================================================
-   UTILITY
-========================================================= */
+/* ============================================================
+   CORRECTION HISTORY
+============================================================ */
 
-function setText(
-    id,
-    value
-){
+function renderCorrections(){
 
-    const el =
-        document.getElementById(id);
+    const corrections =
+        getCorrections();
 
-    if(el)
-        el.textContent = value;
+    const tbody =
+        document.getElementById("correctionsTable");
+
+    tbody.innerHTML = "";
+
+    corrections
+    .sort(
+        (a,b) =>
+        new Date(b.timestamp)-new Date(a.timestamp)
+    )
+    .forEach(c => {
+
+        const tr =
+            document.createElement("tr");
+
+        tr.innerHTML = `
+
+            <td>${formatDateTime(c.timestamp)}</td>
+
+            <td>${c.teacherName}</td>
+
+            <td>
+                ${formatDateTime(c.original.clockIn)}
+                -
+                ${formatDateTime(c.original.clockOut)}
+            </td>
+
+            <td>
+                ${formatDateTime(c.corrected.clockIn)}
+                -
+                ${formatDateTime(c.corrected.clockOut)}
+            </td>
+
+            <td>${c.admin}</td>
+
+            <td>${c.reason}</td>
+
+        `;
+
+        tbody.appendChild(tr);
+
+    });
 
 }
 
 
-/* =========================================================
-   START SYSTEM
-========================================================= */
+/* ============================================================
+   AUDIT LOG
+============================================================ */
 
-setInterval(
-    processAutomaticClockOuts,
-    30000
+function addAudit(user,action,details){
+
+    const audit =
+        getAudit();
+
+    audit.push({
+
+        timestamp:
+            new Date().toISOString(),
+
+        user:
+            user,
+
+        action:
+            action,
+
+        details:
+            details
+
+    });
+
+    saveAudit(audit);
+
+}
+
+
+function renderAudit(){
+
+    const audit =
+        getAudit();
+
+    const tbody =
+        document.getElementById("auditTable");
+
+    tbody.innerHTML = "";
+
+    audit
+    .slice()
+    .reverse()
+    .forEach(item => {
+
+        const tr =
+            document.createElement("tr");
+
+        tr.innerHTML = `
+
+            <td>${formatDateTime(item.timestamp)}</td>
+
+            <td>${item.user}</td>
+
+            <td>${item.action}</td>
+
+            <td>${item.details}</td>
+
+        `;
+
+        tbody.appendChild(tr);
+
+    });
+
+}
+
+
+/* ============================================================
+   AI ATTENDANCE INTELLIGENCE
+============================================================ */
+
+function runAIAnalysis(){
+
+    const users =
+        getUsers();
+
+    const teachers =
+        users.filter(
+            u => u.role === "TEACHER"
+        );
+
+    const attendance =
+        getAttendance();
+
+    const today =
+        getNairobiDate();
+
+    const todayAttendance =
+        attendance.filter(
+            a => a.date === today
+        );
+
+    const outside =
+        todayAttendance.filter(
+            a => a.areaStatus === "OUTSIDE"
+        );
+
+    const automatic =
+        todayAttendance.filter(
+            a => a.clockOutType === "AUTO_11_HOUR"
+        );
+
+    const missing =
+        Math.max(
+            teachers.length -
+            todayAttendance.length,
+            0
+        );
+
+    let verdict =
+        "AI VERDICT: NORMAL";
+
+    if(outside.length > 0){
+
+        verdict =
+            "AI VERDICT: REQUIRES REVIEW";
+
+    }else if(missing > 0){
+
+        verdict =
+            "AI VERDICT: ATTENDANCE INCOMPLETE";
+
+    }else if(automatic.length > 0){
+
+        verdict =
+            "AI VERDICT: MONITOR AUTOMATIC CLOCK-OUTS";
+
+    }
+
+    document.getElementById("aiVerdict").textContent =
+        verdict;
+
+    document.getElementById("aiSummary").textContent =
+
+        `Today's analysis found ${todayAttendance.length}
+        attendance record(s), ${outside.length}
+        outside-area record(s), ${automatic.length}
+        automatic clock-out(s), and ${missing}
+        teacher(s) without a recorded attendance entry.`;
+
+
+    const findings =
+        document.getElementById("aiFindings");
+
+    findings.innerHTML = "";
+
+    const findingList = [
+
+        `Total teachers: ${teachers.length}`,
+
+        `Attendance records today: ${todayAttendance.length}`,
+
+        `Outside-area records: ${outside.length}`,
+
+        `Automatic 11-hour clock-outs: ${automatic.length}`,
+
+        `Teachers without today's record: ${missing}`
+
+    ];
+
+    findingList.forEach(item => {
+
+        const li =
+            document.createElement("li");
+
+        li.textContent = item;
+
+        findings.appendChild(li);
+
+    });
+
+
+    const recommendations =
+        document.getElementById("aiRecommendations");
+
+    recommendations.innerHTML = "";
+
+    const recommendationsList = [];
+
+    if(outside.length){
+
+        recommendationsList.push(
+            "Review all outside-area attendance records and compare them with the staff member's circumstances."
+        );
+
+    }
+
+    if(missing){
+
+        recommendationsList.push(
+            "Review teachers without attendance records before drawing conclusions."
+        );
+
+    }
+
+    if(automatic.length){
+
+        recommendationsList.push(
+            "Review automatic clock-outs to identify repeated failure to manually clock out."
+        );
+
+    }
+
+    if(!recommendationsList.length){
+
+        recommendationsList.push(
+            "No immediate attendance anomaly was detected."
+        );
+
+    }
+
+    recommendationsList.forEach(item => {
+
+        const li =
+            document.createElement("li");
+
+        li.textContent = item;
+
+        recommendations.appendChild(li);
+
+    });
+
+}
+
+
+/* ============================================================
+   PRINCIPAL
+============================================================ */
+
+function renderPrincipal(){
+
+    const teachers =
+        getUsers()
+        .filter(
+            u => u.role === "TEACHER"
+        );
+
+    const today =
+        getNairobiDate();
+
+    const attendance =
+        getAttendance()
+        .filter(
+            a => a.date === today
+        );
+
+    const outside =
+        attendance.filter(
+            a => a.areaStatus === "OUTSIDE"
+        );
+
+    const rate =
+        teachers.length
+        ?
+        Math.round(
+            attendance.length /
+            teachers.length *
+            100
+        )
+        :
+        0;
+
+    document.getElementById("principalTotal").textContent =
+        teachers.length;
+
+    document.getElementById("principalPresent").textContent =
+        attendance.length;
+
+    document.getElementById("principalRate").textContent =
+        rate + "%";
+
+    document.getElementById("principalOutside").textContent =
+        outside.length;
+
+
+    let summary = "";
+
+    if(outside.length){
+
+        summary = `
+
+            <div class="warning">
+
+                <strong>Executive Attention Required</strong>
+
+                <br><br>
+
+                ${outside.length}
+                attendance record(s) were recorded outside
+                the configured school attendance area.
+
+                <br><br>
+
+                The records should be reviewed by the appropriate administrator.
+
+            </div>
+
+        `;
+
+    }else{
+
+        summary = `
+
+            <div class="success-box">
+
+                <strong>Attendance Overview</strong>
+
+                <br><br>
+
+                Today's recorded attendance rate is
+                <strong>${rate}%</strong>.
+
+                No outside-area attendance records were detected.
+
+            </div>
+
+        `;
+
+    }
+
+    document.getElementById("principalSummary").innerHTML =
+        summary;
+
+
+    const tbody =
+        document.getElementById("principalTable");
+
+    tbody.innerHTML = "";
+
+    attendance.forEach(record => {
+
+        const tr =
+            document.createElement("tr");
+
+        tr.innerHTML = `
+
+            <td>${record.teacherName}</td>
+
+            <td>${record.staffNo}</td>
+
+            <td>${formatDateTime(record.clockIn)}</td>
+
+            <td>${formatDateTime(record.clockOut)}</td>
+
+            <td>
+                <span class="status ${
+                    record.clockOut
+                    ? "status-blue"
+                    : "status-green"
+                }">
+
+                    ${
+                        record.clockOut
+                        ? "CLOCKED OUT"
+                        : "CLOCKED IN"
+                    }
+
+                </span>
+            </td>
+
+        `;
+
+        tbody.appendChild(tr);
+
+    });
+
+}
+
+
+/* ============================================================
+   REFRESH EVERYTHING
+============================================================ */
+
+function refreshAll(){
+
+    processAutomaticClockOuts();
+
+    if(currentUser?.role === "ADMIN"){
+
+        renderDashboard();
+
+        renderLocationMonitor();
+
+        renderTeachers();
+
+        renderAdmins();
+
+        populateReportTeachers();
+
+        populateCorrectionRecords();
+
+        renderCorrections();
+
+        renderAudit();
+
+        loadLocationSettings();
+
+    }
+
+    if(currentUser?.role === "TEACHER"){
+
+        renderTeacherAttendance();
+
+        renderTeacherProfile();
+
+    }
+
+    if(currentUser?.role === "PRINCIPAL"){
+
+        renderPrincipal();
+
+        populateReportTeachers();
+
+        generateReport();
+
+    }
+
+}
+
+
+/* ============================================================
+   KEYBOARD LOGIN
+============================================================ */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Enter" &&
+            document.getElementById("loginScreen").style.display !== "none"
+        ){
+
+            login();
+
+        }
+
+    }
 );
-
-
-setInterval(
-    updateDashboard,
-    30000
-);
-
-
-/* Initial settings */
-
-loadSettings();
 
 </script>
 
